@@ -2,30 +2,31 @@ package com.test.springmysql.entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import java.util.List;
 
 @Entity
 public class Comision {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
 
-    private Date fecha_inicio;
-    private Date fecha_final;
-    private Time hora_inicio;
-    private Time hora_final;
+    private LocalDate fecha_inicio;
+    private LocalDate fecha_final;
+    private LocalTime hora_inicio;
+    private LocalTime hora_final;
     private int alumnos_permitidos;
 
     @ManyToOne
     @JoinColumn(name="materia_id", referencedColumnName = "id")
     private Materia materia;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="comision_estudiantes",
-            joinColumns = @JoinColumn(name = "id"),
+            joinColumns = @JoinColumn(name = "comision_id"),
             inverseJoinColumns = @JoinColumn(name="estudiante_id")
     )
 
@@ -44,42 +45,42 @@ public class Comision {
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
-    public Date getFecha_inicio() {
+    public LocalDate getFecha_inicio() {
         return fecha_inicio;
     }
 
-    public void setFecha_inicio(Date fecha_inicio) {
+    public void setFecha_inicio(LocalDate fecha_inicio) {
         this.fecha_inicio = fecha_inicio;
     }
 
-    public Date getFecha_final() {
+    public LocalDate getFecha_final() {
         return fecha_final;
     }
 
-    public void setFecha_final(Date fecha_final) {
+    public void setFecha_final(LocalDate fecha_final) {
         this.fecha_final = fecha_final;
     }
 
-    public Time getHora_inicio() {
+    public LocalTime getHora_inicio() {
         return hora_inicio;
     }
 
-    public void setHora_inicio(Time hora_inicio) {
+    public void setHora_inicio(LocalTime hora_inicio) {
         this.hora_inicio = hora_inicio;
     }
 
-    public Time getHora_final() {
+    public LocalTime getHora_final() {
         return hora_final;
     }
 
-    public void setHora_final(Time hora_final) {
+    public void setHora_final(LocalTime hora_final) {
         this.hora_final = hora_final;
     }
 

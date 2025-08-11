@@ -14,4 +14,39 @@ public class Profesor {
 
     @ManyToMany(mappedBy = "profesores")
     private List<Comision> comisiones;
+
+    public Profesor() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getAntiguedad_universidad() {
+        return antiguedad_universidad;
+    }
+
+    public void setAntiguedad_universidad(int antiguedad_universidad) {
+        this.antiguedad_universidad = antiguedad_universidad;
+    }
+
+    public List<Comision> getComisiones() {
+        return comisiones;
+    }
+
+    public void setComisiones(List<Comision> comisiones) {
+        this.comisiones = comisiones;
+    }
 }
