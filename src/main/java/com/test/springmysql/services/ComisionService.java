@@ -20,8 +20,8 @@ public class ComisionService {
     public Optional<Comision> getComision(Long id){
         return comisionRepository.findById(id);
     }
-    public void saveOrUpdate(Comision comision){
-        comisionRepository.save(comision);
+    public Comision saveOrUpdate(Comision comision){
+        return comisionRepository.save(comision);
     }
     public void deleteComision(Long id){
         comisionRepository.deleteById(id);

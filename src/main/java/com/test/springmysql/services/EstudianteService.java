@@ -21,8 +21,8 @@ public class EstudianteService {
     public Optional<Estudiante> getEstudiante(Long id){
         return estudianteRepository.findById(id);
     }
-    public void saveOrUpdate(Estudiante estudiante){
-        estudianteRepository.save(estudiante);
+    public Estudiante saveOrUpdate(Estudiante estudiante){
+        return estudianteRepository.save(estudiante);
     }
     public void deleteEstudiante(Long id){
         estudianteRepository.deleteById(id);

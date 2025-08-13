@@ -1,5 +1,6 @@
 package com.test.springmysql.services;
 
+import com.test.springmysql.dtos.MateriaDTO;
 import com.test.springmysql.entities.Materia;
 import com.test.springmysql.repositories.MateriaRepository;
 import org.springframework.stereotype.Service;
@@ -18,19 +19,20 @@ public class MateriaService {
         this.materiaRepository = materiaRepository;
     }
 
-    public List<Materia> getMaterias(){
+    public List<Materia> getMaterias() {
         return materiaRepository.findAll();
     }
 
-    public Optional<Materia> getMateria(Long id){
+    public Optional<Materia> getMateria(Long id) {
         return materiaRepository.findById(id);
     }
 
-    public void saveOrUpdate(Materia materia){
-         materiaRepository.save(materia);
+    public Materia saveOrUpdate(Materia materia) {
+        return materiaRepository.save(materia);
     }
-    public void deleteMateria(Long id){
-         materiaRepository.deleteById(id);
+
+    public void deleteMateria(Long id) {
+        materiaRepository.deleteById(id);
     }
 
 }

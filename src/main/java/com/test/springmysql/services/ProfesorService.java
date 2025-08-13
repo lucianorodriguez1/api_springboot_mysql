@@ -22,8 +22,8 @@ public class ProfesorService {
     public Optional<Profesor> getProfesor(Long id){
         return profesorRepository.findById(id);
     }
-    public void saveOrUpdate(Profesor profesor){
-        profesorRepository.save(profesor);
+    public Profesor saveOrUpdate(Profesor profesor){
+        return profesorRepository.save(profesor);
     }
     public void deleteProfesor(Long id){
         profesorRepository.deleteById(id);
