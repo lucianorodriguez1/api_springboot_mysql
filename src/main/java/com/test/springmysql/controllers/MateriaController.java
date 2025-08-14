@@ -1,5 +1,6 @@
 package com.test.springmysql.controllers;
 
+import com.test.springmysql.dtos.MateriaDTO;
 import com.test.springmysql.entities.Materia;
 import com.test.springmysql.services.MateriaService;
 import jakarta.validation.Valid;
@@ -7,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+        import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,23 +23,22 @@ public class MateriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Materia>> getAll() {
+    public ResponseEntity<List<MateriaDTO>> getAll() {
         return ResponseEntity.ok(materiaService.getMaterias());
+    }
+    @GetMapping("/{materiaId}")
+    public ResponseEntity<?> getById(@PathVariable("materiaId") Long materiaId) {
+        Optional<MateriaDTO> materia = materiaService.getMateria(materiaId);
+        return materia.isPresent() ? ResponseEntity.ok(materia.get()) : ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                "message", "Materia no encontrada",
+                "id inexiste en producto", materiaId
+        ));
     }
 
     @PostMapping
     public ResponseEntity<?> saveUpdate(@Valid @RequestBody Materia materia) {
-        Materia savedMateria = materiaService.saveOrUpdate(materia);
+        MateriaDTO savedMateria = materiaService.saveOrUpdate(materia);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMateria);
-    }
-
-    @GetMapping("/{materiaId}")
-    public ResponseEntity<?> getById(@PathVariable("materiaId") Long materiaId) {
-        Optional<Materia> materia = materiaService.getMateria(materiaId);
-        return materia.isPresent() ? ResponseEntity.ok(materia.get()) : ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
-                "message", "Materia no encontrada",
-                "id", materiaId
-        ));
     }
 
     @DeleteMapping("/{materiaId}")
@@ -46,5 +46,4 @@ public class MateriaController {
         materiaService.deleteMateria(materiaId);
         return ResponseEntity.noContent().build();
     }
-
 }

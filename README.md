@@ -46,6 +46,10 @@ https://jakarta.ee/specifications/persistence/2.2/apidocs/javax/persistence/colu
 Anotaciones de Jakarta Validation:
 https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/package-summary?utm_source=chatgpt.com 
 
+Informacion sobre modelmapper basica:
+https://www.geeksforgeeks.org/java/how-to-use-modelmapper-in-spring-boot-with-example-project/
+
+
 
 @COLUMN
 *   columnDefinition = (Optional) The SQL fragment that is used when generating the DDL for the column.

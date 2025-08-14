@@ -3,6 +3,7 @@ package com.test.springmysql.services;
 import com.test.springmysql.dtos.MateriaDTO;
 import com.test.springmysql.entities.Materia;
 import com.test.springmysql.repositories.MateriaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,21 +15,24 @@ public class MateriaService {
     // materiaRepository lo que hay en MateriaRepository. No es necesario si se inyecta por constructor
     //@Autowired
     private final MateriaRepository materiaRepository;
+    private final ModelMapper mapper = new ModelMapper();
 
     public MateriaService(MateriaRepository materiaRepository) {
         this.materiaRepository = materiaRepository;
     }
 
-    public List<Materia> getMaterias() {
-        return materiaRepository.findAll();
+    public List<MateriaDTO> getMaterias() {
+        return materiaRepository.findAll().stream().map(m -> mapper.map(m, MateriaDTO.class)).toList();
     }
 
-    public Optional<Materia> getMateria(Long id) {
-        return materiaRepository.findById(id);
+    public Optional<MateriaDTO> getMateria(Long id) {
+        Optional<Materia> m = materiaRepository.findById(id);
+        return m.map(materia -> mapper.map(materia, MateriaDTO.class));
     }
 
-    public Materia saveOrUpdate(Materia materia) {
-        return materiaRepository.save(materia);
+    public MateriaDTO saveOrUpdate(Materia materia) {
+        Materia m = materiaRepository.save(materia);
+        return mapper.map(m, MateriaDTO.class);
     }
 
     public void deleteMateria(Long id) {
