@@ -30,13 +30,24 @@ public class MateriaService {
         return m.map(materia -> mapper.map(materia, MateriaDTO.class));
     }
 
-    public MateriaDTO saveOrUpdate(Materia materia) {
+    public MateriaDTO createMateria(Materia materia) {
         Materia m = materiaRepository.save(materia);
         return mapper.map(m, MateriaDTO.class);
     }
 
     public void deleteMateria(Long id) {
         materiaRepository.deleteById(id);
+    }
+
+    public MateriaDTO updateMateria(Long id, Materia materia){
+        Optional<Materia> mOpt = materiaRepository.findById(id);
+        if(mOpt.isEmpty()){
+            return null;
+        }
+        Materia m = mOpt.get();
+        m.setNombre(materia.getNombre());
+        materiaRepository.save(m);
+        return mapper.map(m, MateriaDTO.class);
     }
 
 }

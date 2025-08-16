@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class ComisionDTO {
@@ -19,6 +21,10 @@ public class ComisionDTO {
 
     private List<Estudiante> estudiantes;
     private List<Profesor> profesores;
+    private LocalDate fecha_inicio;
+    private LocalDate fecha_final;
+    private LocalTime hora_inicio;
+    private LocalTime hora_final;
 
     public ComisionDTO() {
     }
@@ -53,5 +59,37 @@ public class ComisionDTO {
 
     public void setProfesores(List<Profesor> profesores) {
         this.profesores = profesores;
+    }
+
+    public LocalDate getFecha_inicio() {
+        return fecha_inicio;
+    }
+
+    public void setFecha_inicio(LocalDate fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
+    }
+
+    public LocalDate getFecha_final() {
+        return fecha_final;
+    }
+
+    public void setFecha_final(LocalDate fecha_final) {
+        this.fecha_final = fecha_final;
+    }
+
+    public LocalTime getHora_inicio() {
+        return hora_inicio;
+    }
+
+    public void setHora_inicio(LocalTime hora_inicio) {
+        this.hora_inicio = hora_inicio;
+    }
+
+    public LocalTime getHora_final() {
+        return hora_final;
+    }
+
+    public void setHora_final(LocalTime hora_final) {
+        this.hora_final = hora_final;
     }
 }

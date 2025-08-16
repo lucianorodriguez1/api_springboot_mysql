@@ -31,13 +31,13 @@ public class MateriaController {
         Optional<MateriaDTO> materia = materiaService.getMateria(materiaId);
         return materia.isPresent() ? ResponseEntity.ok(materia.get()) : ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
                 "message", "Materia no encontrada",
-                "id inexiste en producto", materiaId
+                "id introducido ", materiaId
         ));
     }
 
     @PostMapping
-    public ResponseEntity<?> saveUpdate(@Valid @RequestBody Materia materia) {
-        MateriaDTO savedMateria = materiaService.saveOrUpdate(materia);
+    public ResponseEntity<?> create(@Valid @RequestBody Materia materia) {
+        MateriaDTO savedMateria = materiaService.createMateria(materia);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMateria);
     }
 
@@ -45,5 +45,11 @@ public class MateriaController {
     public ResponseEntity<Void> delete(@PathVariable("materiaId") Long materiaId) {
         materiaService.deleteMateria(materiaId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{materiaId}")
+    public ResponseEntity<?> update(@PathVariable("materiaId") Long id, @Valid @RequestBody Materia materia){
+        MateriaDTO upd = materiaService.updateMateria(id,materia);
+        return upd != null ? ResponseEntity.ok(upd) :ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("mensaje","Materia no encontrado","id introducido",id));
     }
 }
