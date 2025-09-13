@@ -5,6 +5,7 @@ Sistema realizado con el objetivo de tener documentado la conexion de MySQL con 
 ACLARACION: No se usa lombok.
 
 Diagrama entidad relacion (DER) que cree de mi sistema:
+<img width="734" height="446" alt="Image" src="https://github.com/user-attachments/assets/06420a0a-91bb-40f0-8a7e-ea873b0319a0" /> 
 
 ## Instalar dependencias
 * spring-boot-starter-data-jpa 
