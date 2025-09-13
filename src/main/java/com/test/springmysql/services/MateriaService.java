@@ -2,6 +2,7 @@ package com.test.springmysql.services;
 
 import com.test.springmysql.dtos.MateriaDTO;
 import com.test.springmysql.entities.Materia;
+import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.MateriaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,12 @@ public class MateriaService {
         return materiaRepository.findAll().stream().map(m -> mapper.map(m, MateriaDTO.class)).toList();
     }
 
-    public Optional<MateriaDTO> getMateria(Long id) {
+    public MateriaDTO getMateria(Long id) {
         Optional<Materia> m = materiaRepository.findById(id);
-        return m.map(materia -> mapper.map(materia, MateriaDTO.class));
+        if(!m.isPresent()){
+            throw new RecursoNoEncontrado("cliente","id",id);
+        }
+        return mapper.map(m.get(), MateriaDTO.class);
     }
 
     public MateriaDTO createMateria(Materia materia) {
@@ -36,13 +40,16 @@ public class MateriaService {
     }
 
     public void deleteMateria(Long id) {
+        if(!materiaRepository.existsById(id)) {
+            throw new RecursoNoEncontrado("cliente","id",id);
+        }
         materiaRepository.deleteById(id);
     }
 
     public MateriaDTO updateMateria(Long id, Materia materia){
         Optional<Materia> mOpt = materiaRepository.findById(id);
-        if(mOpt.isEmpty()){
-            return null;
+        if(!mOpt.isPresent()){
+            throw new RecursoNoEncontrado("cliente","id",id);
         }
         Materia m = mOpt.get();
         m.setNombre(materia.getNombre());

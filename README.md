@@ -1,10 +1,12 @@
-# Sistema estudiantil SpringBoot y MySQL
+# Sistema estudiantil con Spring Boot y MySQL
 
-Sistema realizado con el objetivo de tener documentado la conexion de MySQL con Spring Boot.
+Sistema realizado con el objetivo de tener documentado la conexion de MySQL con Spring Boot
+y el correcto uso de excepciones y buenas practicas.
 
 ACLARACION: No se usa lombok.
 
 Diagrama entidad relacion (DER) que cree de mi sistema:
+
 
 ## Instalar dependencias
 * spring-boot-starter-data-jpa 
@@ -49,7 +51,8 @@ https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation
 Informacion sobre modelmapper basica:
 https://www.geeksforgeeks.org/java/how-to-use-modelmapper-in-spring-boot-with-example-project/
 
-
+Links para las excepciones 
+https://www.youtube.com/watch?v=Ef2Y0YsQJCE&t=1724s
 
 @COLUMN
 *   columnDefinition = (Optional) The SQL fragment that is used when generating the DDL for the column.
@@ -99,5 +102,24 @@ Anotacion importante para evitar ciclos en relaciones bidireccionales :
 RECORDAR:
 Poner los get, set y constructor vacio en las entidades para que hibernateJPA
 interactue con la base de datos.
+El .class se refiere al literal de la clase, es decir, obtenemos el objeto de esa clase con toda su metainformacion.
 
 Al crear las exccepciones se empieza usando una clase general para controlarlas
+
+## Crear excepcion
+* Crear paquete de excepciones, ahi dentro crear una clase global para las excepciones y luego las clases que 
+van a ser excepciones.
+* Las clases que van a hacer excepciones van a ser heredadas de RunTimeException 
+* La clase global va a tner la anoacion restcontrolleradvice para que detecte los errores en tiempos de ejecucion.
+Sus metodos van a empezar por el metodo handler y sigue con el nombre de la excepcion. Los metodos tienen una anotacion de 
+exceptionhandler para detectar la clase que nosotros creamos.
+* Creo el DTO ApiResponse para manejar las respuestas.
+* Hay excepcion que Spring trae por defecto. como el MethodArgumentNotValidException.class y (Exception.class. Yo voy a implementar
+el BadRequestException y RecursoNoEncontradoExcepcion.
+
+Si queremos poner una excepcion por si una ruta es inexiste podemos poner esto en aplication.properties:
+// Si se debe lanzar una "NoHandlerFoundException" si no se encontró ningún controlador para procesar una solicitud.
+spring.mvc.throw-exception-if-no-handler-found=true
+spring.web.resources.add-mappings=false
+
+y luego ponemos en el controlador global de excepciones la excepcion que trae spring por defecto.

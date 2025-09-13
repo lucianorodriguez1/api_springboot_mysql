@@ -28,11 +28,8 @@ public class MateriaController {
     }
     @GetMapping("/{materiaId}")
     public ResponseEntity<?> getById(@PathVariable("materiaId") Long materiaId) {
-        Optional<MateriaDTO> materia = materiaService.getMateria(materiaId);
-        return materia.isPresent() ? ResponseEntity.ok(materia.get()) : ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
-                "message", "Materia no encontrada",
-                "id introducido ", materiaId
-        ));
+        MateriaDTO materia = materiaService.getMateria(materiaId);
+        return  ResponseEntity.ok(materia);
     }
 
     @PostMapping
@@ -50,6 +47,6 @@ public class MateriaController {
     @PutMapping("/{materiaId}")
     public ResponseEntity<?> update(@PathVariable("materiaId") Long id, @Valid @RequestBody Materia materia){
         MateriaDTO upd = materiaService.updateMateria(id,materia);
-        return upd != null ? ResponseEntity.ok(upd) :ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("mensaje","Materia no encontrado","id introducido",id));
+        return ResponseEntity.ok(upd);
     }
 }
