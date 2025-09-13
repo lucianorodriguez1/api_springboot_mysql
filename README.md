@@ -1,12 +1,11 @@
-# Sistema estudiantil con Spring Boot y MySQL
+# Sistema estudiantil SpringBoot y MySQL
 
-Sistema realizado con el objetivo de tener documentado la conexion de MySQL con Spring Boot
-y el correcto uso de excepciones y buenas practicas.
+Sistema realizado con el objetivo de tener documentado la conexion de MySQL con Spring Boot.
 
 ACLARACION: No se usa lombok.
 
 Diagrama entidad relacion (DER) que cree de mi sistema:
-
+<img width="734" height="446" alt="Image" src="https://github.com/user-attachments/assets/06420a0a-91bb-40f0-8a7e-ea873b0319a0" /> 
 
 ## Instalar dependencias
 * spring-boot-starter-data-jpa 
@@ -44,15 +43,6 @@ https://medium.com/devdomain/mastering-spring-database-relationship-annotations-
 
 Tips para de Column para poner en cada Entity.
 https://jakarta.ee/specifications/persistence/2.2/apidocs/javax/persistence/column
-
-Anotaciones de Jakarta Validation:
-https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/package-summary?utm_source=chatgpt.com 
-
-Informacion sobre modelmapper basica:
-https://www.geeksforgeeks.org/java/how-to-use-modelmapper-in-spring-boot-with-example-project/
-
-Links para las excepciones 
-https://www.youtube.com/watch?v=Ef2Y0YsQJCE&t=1724s
 
 @COLUMN
 *   columnDefinition = (Optional) The SQL fragment that is used when generating the DDL for the column.
