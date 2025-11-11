@@ -25,16 +25,13 @@ Sistema realizado con el objetivo de tener documentado la conexion de MySQL con 
 - `DB_USERNAME` → usuario de la base de datos
 - `DB_PASSWORD` → contraseña de la base de datos
 
-🚀 Pasos para ejecutar
+Ejemplo (`application.properties`):
 
-1. Agregar las variables de la base de datos en application.properties.
-2. Tener la base creada en MySQL.
-3. Configurar el RUN para ejecutar siempre el archivo Main.
-    En IntelliJ: Edit Configuration -> Application -> Main Class -> Seleccionar archivo main.
-4. Crear entidades en la carpeta entities con atributos, relaciones y anotaciones.
-5. Crear las carpetas dto, services y controllers.
-6. Crear excepciones con un DTO ApiResponse.
-
+```properties
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD} 
+```
 
 ## 🚀 Pasos para ejecutar
 1. Agregar las variables de la base de datos en `application.properties`.
@@ -109,10 +106,53 @@ Además extiende `PagingAndSortingRepository` y `QueryByExampleExecutor`, habili
 
 ## 🛑 Manejo de Excepciones
 1. Crear paquete `exceptions`.
-2. Agregar clase **global** de manejo de excepciones (`@RestControllerAdvice`).
+2. Agregar clase **global** de manejo de excepciones con nombre **HandlerException** con `@RestControllerAdvice`.
 3. Las excepciones personalizadas extienden de `RuntimeException`.
 4. Métodos con `@ExceptionHandler` capturan excepciones y retornan un `ResponseEntity`.
 5. Crear un DTO `ApiResponse` para estandarizar las respuestas de error.
+
+Ejemplo de `handlerException`
+
+```java
+@RestControllerAdvice
+public class HandlerException {
+
+   
+    //controla los errores de varios tipos y globalizrlo con un error 500
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse> handleException(Exception exception, WebRequest webRequest){
+        //en el paraemtro del getDescription va false
+        //para que no devuelva informacion del cliente y solo la uri
+        ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
+    }
+}
+```
+Ejemplo de `Excepcion personalizada`
+
+``` java
+package com.test.springmysql.exceptions;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class RecursoNoEncontrado extends RuntimeException{
+    private String nombreRecurso;
+    private String nombreCampo;
+    private Object valorCampo;
+
+    public RecursoNoEncontrado(String nombreRecurso, String nombreCampo, Object valorCampo) {
+        super(String.format("%s no fue encontrado con %s = '%s' ",nombreRecurso,nombreCampo,valorCampo));
+        this.nombreRecurso = nombreRecurso;
+        this.nombreCampo = nombreCampo;
+        this.valorCampo = valorCampo;
+    }
+}
+
+```
+
+
 
 Ejemplo de configuración en `application.properties` para rutas inexistentes:
 ```properties
@@ -126,3 +166,4 @@ spring.web.resources.add-mappings=false
 
 
 // y luego ponemos en el controlador global de excepciones la excepcion que trae spring por defecto.
+```
