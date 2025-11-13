@@ -15,10 +15,9 @@ public class Materia {
 
     //CascadeType sirve para decidir que se hace con las clases hijas si la clase padre persiste, se borran, etc.
     @OneToMany(mappedBy = "materia", cascade = CascadeType.ALL)
-    @JsonIgnore
+    //@JsonIgnore
     private List<Comision> comisiones;
 
-    //ES OBLIGATORIO USAR GET, SET Y CONSTRUCTOR VACIO porque JPA los necesita. Spring Boot usa Hibernate para la persistencia de datos.
 
 
     public Materia() {

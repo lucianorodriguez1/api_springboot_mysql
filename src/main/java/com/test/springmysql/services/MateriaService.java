@@ -12,9 +12,7 @@ import java.util.Optional;
 
 @Service
 public class MateriaService {
-    //Autowired nos ayuda con la inyeccion de . En este caso le decimos que inyecte en
-    // materiaRepository lo que hay en MateriaRepository. No es necesario si se inyecta por constructor
-    //@Autowired
+
     private final MateriaRepository materiaRepository;
     private final ModelMapper mapper = new ModelMapper();
 
@@ -34,9 +32,10 @@ public class MateriaService {
         return mapper.map(m.get(), MateriaDTO.class);
     }
 
-    public MateriaDTO createMateria(Materia materia) {
-        Materia m = materiaRepository.save(materia);
-        return mapper.map(m, MateriaDTO.class);
+    public MateriaDTO createMateria(MateriaDTO materiadto) {
+        Materia materia = mapper.map(materiadto, Materia.class);
+        Materia saved = materiaRepository.save(materia);
+        return mapper.map(saved, MateriaDTO.class);
     }
 
     public void deleteMateria(Long id) {

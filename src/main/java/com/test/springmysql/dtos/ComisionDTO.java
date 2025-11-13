@@ -12,6 +12,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class ComisionDTO {
+
+    private long id;
     @NotNull
     @NotEmpty
     private Materia materia;
@@ -91,5 +93,13 @@ public class ComisionDTO {
 
     public void setHora_final(LocalTime hora_final) {
         this.hora_final = hora_final;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

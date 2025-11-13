@@ -99,9 +99,16 @@ Además extiende `PagingAndSortingRepository` y `QueryByExampleExecutor`, habili
 
 ## ⚠️ Notas importantes
 * Usar `@JsonIgnore` para evitar ciclos en relaciones bidireccionales.
-* Incluir siempre getters, setters y constructor vacío en entidades para Hibernate/JPA.
+* En las clases de tipo **entities** : 
+  *  comienzan con anotaciones `@Entity` y `@Table(name = "nombre_tabla")`
+  *  los ids van con `@Id` y `@GeneratedValue(strategy = GenerationType.IDENTITY)`.  
+  * Se suele utilizar long en IDs y no int porque permite un mayor alcance para valores numericos.
+  * sU USA `@Column(name="nombre_columna")` si quiero cambiar el nombre del atributo
+  * Incluir siempre getters, setters y constructor vacío en entidades para Hibernate/JPA.
 * El literal `.class` se refiere al objeto de clase en Java (metainformación).
-
+* @Autowired nos ayuda con la inyeccion de un servicio a otro. Por ejemplo: `@Autowired` ` private final MateriaRepository materiaRepository;` nos dice que la clase que ya creamos MateriaRepository se inyecta en materiaRepository
+* No hace fata try/catch para lanzar excepciones porque si tenés una clase anotada con @RestControllerAdvice, esa clase “escucha” todas las excepciones lanzadas en los controladores. (tiene que estar un controlleradvice con exceptionhandler).
+* 
 ---
 
 ## 🛑 Manejo de Excepciones
@@ -167,3 +174,22 @@ spring.web.resources.add-mappings=false
 
 // y luego ponemos en el controlador global de excepciones la excepcion que trae spring por defecto.
 ```
+
+### EXCEPCIONES DE SPRING POR DEFECTO
+`MethodArgumentNotValidException` → fallan validaciones de @Valid en body (DTO).  
+`BindException` → fallan binds de formularios/params.  
+`ConstraintViolationException` → validación de @Validated en path/query params.    
+`MethodArgumentTypeMismatchException` → tipo incompatible en path/query (ej: id no numérico).    
+`MissingServletRequestParameterException` → falta un query param requerido.    
+`HttpMessageNotReadableException` → JSON mal formado o tipos inválidos.    
+`HttpRequestMethodNotSupportedException` → método no permitido (POST vs GET).    
+`HttpMediaTypeNotSupportedException` / HttpMediaTypeNotAcceptableException → Content-Type o Accept inválidos.     
+`NoHandlerFoundException` → 404 por ruta inexistente (solo si lo activás, ver abajo).        
+`DataAccessException` (raíz, unchecked)    
+`DataIntegrityViolationException` → violación de integridad (p. ej., UNIQUE/NOT NULL/FK).    
+`DuplicateKeyException` (en algunos drivers) → clave duplicada.        
+`AccessDeniedException` → 403.    
+`AuthenticationException` → 401.     
+`ResponseStatusException` → lanzar un error HTTP sin crear exception custom.    
+
+En mi clase `HandlerException` comente algunas funciones para que se sepa de que trata cada una.

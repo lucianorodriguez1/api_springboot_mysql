@@ -7,10 +7,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-        import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/materias")
@@ -33,8 +31,8 @@ public class MateriaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody Materia materia) {
-        MateriaDTO savedMateria = materiaService.createMateria(materia);
+    public ResponseEntity<?> create(@Valid @RequestBody MateriaDTO materiadto) {
+        MateriaDTO savedMateria = materiaService.createMateria(materiadto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMateria);
     }
 

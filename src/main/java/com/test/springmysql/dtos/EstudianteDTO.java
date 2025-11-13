@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class EstudianteDTO {
 
+    private long id;
+
     @NotNull
     @NotEmpty
     private String nombre;
@@ -31,5 +33,13 @@ public class EstudianteDTO {
 
     public void setCuil(String cuil) {
         this.cuil = cuil;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
