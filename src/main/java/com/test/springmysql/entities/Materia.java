@@ -1,6 +1,5 @@
 package com.test.springmysql.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,6 +10,7 @@ public class Materia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String nombre;
 
     //CascadeType sirve para decidir que se hace con las clases hijas si la clase padre persiste, se borran, etc.

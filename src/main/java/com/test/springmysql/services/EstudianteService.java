@@ -2,12 +2,12 @@ package com.test.springmysql.services;
 
 import com.test.springmysql.dtos.EstudianteDTO;
 import com.test.springmysql.entities.Estudiante;
+import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.EstudianteRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EstudianteService {
@@ -26,34 +26,30 @@ public class EstudianteService {
 
     }
 
-    public Optional<EstudianteDTO> getEstudiante(Long id) {
-        Optional<Estudiante> eOpt=  estudianteRepository.findById(id);
-        if(eOpt.isEmpty()){
-            return null;
-        }
-        return eOpt.map(e->mapper.map(e,EstudianteDTO.class));
+    public EstudianteDTO getEstudiante(Long id) {
+        Estudiante e = estudianteRepository.findById(id)
+                .orElseThrow(()-> new RecursoNoEncontrado("estudiante","id",id));
+        return mapper.map(e, EstudianteDTO.class);
     }
 
-    public EstudianteDTO createEstudiante(Estudiante estudiante) {
-        Estudiante e = estudianteRepository.save(estudiante);
-        return mapper.map(e, EstudianteDTO.class);
+    public EstudianteDTO createEstudiante(EstudianteDTO dto) {
+        Estudiante e = mapper.map(dto, Estudiante.class);
+        Estudiante saved = estudianteRepository.save(e);
+        return mapper.map(saved, EstudianteDTO.class);
     }
 
     public void deleteEstudiante(Long id) {
+        estudianteRepository.findById(id)
+                        .orElseThrow(()-> new RecursoNoEncontrado("estudiante","id",id));
         estudianteRepository.deleteById(id);
     }
 
-    public EstudianteDTO updateEstudiante(Long id, Estudiante estudiante) {
-        Optional<Estudiante> eOpt = estudianteRepository.findById(id);
-        if(eOpt.isEmpty()){
-            return null;
-        }
-        Estudiante e = eOpt.get();
-        e.setNombre(estudiante.getNombre());
-        e.setCuil(estudiante.getCuil());
-        e.setComisiones(estudiante.getComisiones());
-        estudianteRepository.save(e);
-        return mapper.map(e, EstudianteDTO.class);
-
+    public EstudianteDTO updateEstudiante(Long id, EstudianteDTO dto) {
+        Estudiante e = estudianteRepository.findById(id)
+                        .orElseThrow(()->new RecursoNoEncontrado("estudiante","id",id));
+        e.setNombre(dto.getNombre());
+        e.setCuil(dto.getCuil());
+        Estudiante saved = estudianteRepository.save(e);
+        return mapper.map(saved, EstudianteDTO.class);
     }
 }

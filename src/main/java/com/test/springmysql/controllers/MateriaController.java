@@ -1,7 +1,6 @@
 package com.test.springmysql.controllers;
 
 import com.test.springmysql.dtos.MateriaDTO;
-import com.test.springmysql.entities.Materia;
 import com.test.springmysql.services.MateriaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,6 +23,7 @@ public class MateriaController {
     public ResponseEntity<List<MateriaDTO>> getAll() {
         return ResponseEntity.ok(materiaService.getMaterias());
     }
+
     @GetMapping("/{materiaId}")
     public ResponseEntity<?> getById(@PathVariable("materiaId") Long materiaId) {
         MateriaDTO materia = materiaService.getMateria(materiaId);
@@ -43,8 +43,8 @@ public class MateriaController {
     }
 
     @PutMapping("/{materiaId}")
-    public ResponseEntity<?> update(@PathVariable("materiaId") Long id, @Valid @RequestBody Materia materia){
-        MateriaDTO upd = materiaService.updateMateria(id,materia);
+    public ResponseEntity<?> update(@PathVariable("materiaId") Long id, @Valid @RequestBody MateriaDTO materiadto){
+        MateriaDTO upd = materiaService.updateMateria(id,materiadto);
         return ResponseEntity.ok(upd);
     }
 }

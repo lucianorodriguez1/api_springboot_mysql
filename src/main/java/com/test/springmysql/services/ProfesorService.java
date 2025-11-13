@@ -2,12 +2,12 @@ package com.test.springmysql.services;
 
 import com.test.springmysql.dtos.ProfesorDTO;
 import com.test.springmysql.entities.Profesor;
+import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.ProfesorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProfesorService {
@@ -22,26 +22,30 @@ public class ProfesorService {
     public List<ProfesorDTO> getProfesores(){
         return profesorRepository.findAll().stream().map(p->mapper.map(p, ProfesorDTO.class)).toList();
     }
-    public Optional<ProfesorDTO> getProfesor(Long id){
-        return profesorRepository.findById(id).map(profesor -> mapper.map(profesor, ProfesorDTO.class));
-    }
-    public ProfesorDTO createProfesor(Profesor profesor){
-        Profesor p =  profesorRepository.save(profesor);
+    public ProfesorDTO getProfesor(Long id){
+        Profesor p = profesorRepository.findById(id)
+                .orElseThrow(()->new RecursoNoEncontrado("profesor", "id", id));
         return mapper.map(p, ProfesorDTO.class);
+    }
+    public ProfesorDTO createProfesor(ProfesorDTO profesordto){
+        Profesor p = mapper.map(profesordto,Profesor.class);
+        Profesor saved =  profesorRepository.save(p);
+        return mapper.map(saved, ProfesorDTO.class);
     }
     public void deleteProfesor(Long id){
+        profesorRepository.findById(id)
+                .orElseThrow(()->new RecursoNoEncontrado("profesor", "id", id));
         profesorRepository.deleteById(id);
     }
-    public ProfesorDTO updateProfesor(Long id, Profesor profesor){
-        Optional<Profesor> pOpt = profesorRepository.findById(id);
-        if(pOpt.isEmpty()) {
-            return null;
-        }
-        Profesor p = pOpt.get();
-        p.setNombre(profesor.getNombre());
-        p.setAntiguedad_universidad(profesor.getAntiguedad_universidad());
-        profesorRepository.save(p);
-        return mapper.map(p, ProfesorDTO.class);
+    public ProfesorDTO updateProfesor(Long id, ProfesorDTO profesordto){
+        Profesor p = profesorRepository.findById(id)
+                .orElseThrow(()->new RecursoNoEncontrado("profesor", "id", id));
+
+        p.setNombre(profesordto.getNombre());
+        p.setAntiguedad_universidad(profesordto.getAntiguedad_universidad());
+
+        Profesor saved = profesorRepository.save(p);
+        return mapper.map(saved, ProfesorDTO.class);
     }
 
 }

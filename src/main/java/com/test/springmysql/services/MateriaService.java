@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MateriaService {
@@ -25,11 +24,9 @@ public class MateriaService {
     }
 
     public MateriaDTO getMateria(Long id) {
-        Optional<Materia> m = materiaRepository.findById(id);
-        if(!m.isPresent()){
-            throw new RecursoNoEncontrado("cliente","id",id);
-        }
-        return mapper.map(m.get(), MateriaDTO.class);
+        Materia m = materiaRepository.findById(id)
+                .orElseThrow(()->new RecursoNoEncontrado("materia","id",id));
+        return mapper.map(m, MateriaDTO.class);
     }
 
     public MateriaDTO createMateria(MateriaDTO materiadto) {
@@ -39,21 +36,18 @@ public class MateriaService {
     }
 
     public void deleteMateria(Long id) {
-        if(!materiaRepository.existsById(id)) {
-            throw new RecursoNoEncontrado("cliente","id",id);
-        }
+        materiaRepository.findById(id)
+                        .orElseThrow(()->new RecursoNoEncontrado("materia","id",id));
         materiaRepository.deleteById(id);
     }
 
-    public MateriaDTO updateMateria(Long id, Materia materia){
-        Optional<Materia> mOpt = materiaRepository.findById(id);
-        if(!mOpt.isPresent()){
-            throw new RecursoNoEncontrado("cliente","id",id);
-        }
-        Materia m = mOpt.get();
-        m.setNombre(materia.getNombre());
-        materiaRepository.save(m);
-        return mapper.map(m, MateriaDTO.class);
+    public MateriaDTO updateMateria(Long id, MateriaDTO dto){
+       Materia m = materiaRepository.findById(id)
+               .orElseThrow(()->new RecursoNoEncontrado("materia","id",id));
+
+        m.setNombre(dto.getNombre());
+        Materia saved = materiaRepository.save(m);
+        return mapper.map(saved, MateriaDTO.class);
     }
 
 }

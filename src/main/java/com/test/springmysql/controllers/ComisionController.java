@@ -1,7 +1,6 @@
 package com.test.springmysql.controllers;
 
 import com.test.springmysql.dtos.ComisionDTO;
-import com.test.springmysql.entities.Comision;
 import com.test.springmysql.services.ComisionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -25,12 +24,12 @@ public class ComisionController {
     }
 
     @PostMapping
-    public ResponseEntity<ComisionDTO> create(@Valid @RequestBody Comision comision){
-        return ResponseEntity.status(HttpStatus.CREATED).body(comisionService.createComision(comision));
+    public ResponseEntity<ComisionDTO> create(@Valid @RequestBody ComisionDTO comisiondto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(comisionService.createComision(comisiondto));
     }
 
     @GetMapping("/{comisionId}")
-    public ResponseEntity<Optional<ComisionDTO>> getById(@PathVariable("comisionId") Long id){
+    public ResponseEntity<ComisionDTO> getById(@PathVariable("comisionId") Long id){
         return ResponseEntity.ok(comisionService.getComision(id));
     }
 
@@ -38,9 +37,10 @@ public class ComisionController {
     public void delete(@PathVariable("comisionId") Long id){
         comisionService.deleteComision(id);
     }
+
     @PutMapping("/{comisionId}")
-    public ResponseEntity<ComisionDTO> update(@PathVariable("comisionId") Long id ,@Valid @RequestBody Comision comision){
-        return ResponseEntity.ok(comisionService.updateComision(id, comision));
+    public ResponseEntity<ComisionDTO> update(@PathVariable("comisionId") Long id ,@Valid @RequestBody ComisionDTO comisiondto){
+        return ResponseEntity.ok(comisionService.updateComision(id, comisiondto));
     }
 
 

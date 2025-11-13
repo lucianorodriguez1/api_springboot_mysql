@@ -108,7 +108,12 @@ Además extiende `PagingAndSortingRepository` y `QueryByExampleExecutor`, habili
 * El literal `.class` se refiere al objeto de clase en Java (metainformación).
 * @Autowired nos ayuda con la inyeccion de un servicio a otro. Por ejemplo: `@Autowired` ` private final MateriaRepository materiaRepository;` nos dice que la clase que ya creamos MateriaRepository se inyecta en materiaRepository
 * No hace fata try/catch para lanzar excepciones porque si tenés una clase anotada con @RestControllerAdvice, esa clase “escucha” todas las excepciones lanzadas en los controladores. (tiene que estar un controlleradvice con exceptionhandler).
-* 
+* Acordarse que:
+  * El controller deberia usar DTOs (request y response).
+  * El service Puede usar DTOs hacia afuera (lo que ve el controller) y Entities hacia adentro (lo que guarda en repos).
+  * El repository solo trabaja con Entities.
+  * El uso de `ìsPresent` o `get` esta "deprecado". En cambio tendrias que usar el orElseThow. (se muestran ejemplos en los servicios donde los metodos del repositorio devuelven Optional en los servicios).
+  * 
 ---
 
 ## 🛑 Manejo de Excepciones

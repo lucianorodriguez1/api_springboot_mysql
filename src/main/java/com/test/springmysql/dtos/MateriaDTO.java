@@ -2,12 +2,14 @@ package com.test.springmysql.dtos;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class MateriaDTO {
 
     private long id;
     @NotNull
     @NotEmpty
+    @Size(min = 3, message = "El nombre debe tener al menos 3 caracteres")
     private String nombre;
 
     public MateriaDTO() {
