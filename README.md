@@ -168,9 +168,6 @@ public class RecursoNoEncontrado extends RuntimeException{
 
 Ejemplo de configuración en `application.properties` para rutas inexistentes:
 ```properties
-spring.mvc.throw-exception-if-no-handler-found=true
-spring.web.resources.add-mappings=false
-
 // Si queremos poner una excepcion por si una ruta es inexiste podemos poner esto en aplication.properties:
 // Si se debe lanzar una "NoHandlerFoundException" si no se encontró ningún controlador para procesar una solicitud.
 spring.mvc.throw-exception-if-no-handler-found=true
@@ -198,3 +195,45 @@ spring.web.resources.add-mappings=false
 `ResponseStatusException` → lanzar un error HTTP sin crear exception custom.    
 
 En mi clase `HandlerException` comente algunas funciones para que se sepa de que trata cada una.
+
+---
+
+# TEST
+
+## JUNIT
+* Usar el directorio `test`.
+* Tener el mismo direvtorio que main.
+* En los test unitarios siempre voy a trabajar con valor esperado y 
+valor actual (valor que el metodo me devolvio).
+* Lo que hace Junit es comprar el valor esperado con el valor actual.
+* Por defecto, los test unitarios pasan.
+* La estructura que se suele usar en test unitario es **given** (se suele tener las variables listas) **when** (se ejecuta el metodo) 
+y **then** (evaluamos el resultado del metodo).
+* Los metodos son de tipo void y cada uno tiene una anotacion @Test
+* Opcionalmente puedo instalar un plugin llamado jacoco para ver la cobertura de mis test
+* La calidad del test suele estar entre 85 - 95.
+* Cuando queremos probar una funcion de error creamos otra metodo con una palabra 
+Error agregado al final del nombre del metodo. Y dentro del metodo
+no suele ir el **when** si no que se coloca directamente el assertThrow
+* Podemos configurar un metodo para que se ejecute antes de todos los tests 
+con `@BeforeEach `
+* @Para poner nombre al test es con **@DisplayName** arriba de **@Test**
+
+
+## TIPOS DE ASSERTIONS
+* assertEquals(vEsperado,vActual) : sirve para evaluar un valor esperado con el valor actual.
+* assertTrue() : valida que tenga un verdadero
+* assertFalse()
+* assertNotNull() : valida que el objeto no sea nulo
+* assertInstanceOf(vEsperado,vActual) : valida el tipo de objeto que tengo
+* assertThrow() : valida excepciones.
+
+
+## MOCKITO
+* Agregamos la dependencia mockito : **mockito-junit-jupiter**
+* Mockito es simular objetos y trabaja con las dependencia y no la clase que estoy testeando.
+* Arriba de la **clase** a testear ponemos `@ExtendWith(MockitoExtension.class)`, 
+`@Mock` en la clase dependencia a simular y `@InjectMocks` en la clase a testear. 
+* HAY VARIAS FORMAS DE INSERTAR MOCKITO. Anteriormente menciona una de esas formas.
+* `verify` se usa con la dependencia.
+* `ArgumentCaptur<Dato>` sirve para capturar el objeto y validarlo.
