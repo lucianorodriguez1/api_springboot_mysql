@@ -31,6 +31,11 @@ Ejemplo (`application.properties`):
 spring.datasource.url=${DB_URL}
 spring.datasource.username=${DB_USERNAME}
 spring.datasource.password=${DB_PASSWORD} 
+spring.application.name=springmysql
+#Visualizar las consultas
+spring.jpa.show-sql=true
+#Crear/actualiza las tablas de la base de datos. Puede ser update o create.
+spring.jpa.hibernate.ddl-auto=update
 ```
 
 ## 🚀 Pasos para ejecutar
@@ -40,7 +45,7 @@ spring.datasource.password=${DB_PASSWORD}
    > IntelliJ IDEA → `Edit Configuration -> Application -> Main Class -> Seleccionar archivo main`.
 4. Crear entidades en la carpeta `entities` con atributos, relaciones y anotaciones.
 5. Crear las carpetas `dto`, `services` y `controllers`.
-6. Crear las excepciones con un DTO `ApiResponse`.
+6. Crear las excepciones y  un DTO `ApiResponse` para devolver las respuestas en ese formato cuando pasa una excepcion.
 
 ---
 
@@ -178,21 +183,20 @@ spring.web.resources.add-mappings=false
 ```
 
 ### EXCEPCIONES DE SPRING POR DEFECTO
-`MethodArgumentNotValidException` → fallan validaciones de @Valid en body (DTO).  
-`BindException` → fallan binds de formularios/params.  
-`ConstraintViolationException` → validación de @Validated en path/query params.    
-`MethodArgumentTypeMismatchException` → tipo incompatible en path/query (ej: id no numérico).    
-`MissingServletRequestParameterException` → falta un query param requerido.    
-`HttpMessageNotReadableException` → JSON mal formado o tipos inválidos.    
-`HttpRequestMethodNotSupportedException` → método no permitido (POST vs GET).    
-`HttpMediaTypeNotSupportedException` / HttpMediaTypeNotAcceptableException → Content-Type o Accept inválidos.     
-`NoHandlerFoundException` → 404 por ruta inexistente (solo si lo activás, ver abajo).        
-`DataAccessException` (raíz, unchecked)    
-`DataIntegrityViolationException` → violación de integridad (p. ej., UNIQUE/NOT NULL/FK).    
-`DuplicateKeyException` (en algunos drivers) → clave duplicada.        
-`AccessDeniedException` → 403.    
-`AuthenticationException` → 401.     
-`ResponseStatusException` → lanzar un error HTTP sin crear exception custom.    
+* `MethodArgumentNotValidException` → fallan validaciones de @Valid en body (DTO).  
+* `BindException` → fallan binds de formularios/params.  
+* `ConstraintViolationException` → validación de @Validated en path/query params.    
+* `MethodArgumentTypeMismatchException` → tipo incompatible en path/query (ej: id no numérico).    
+* `MissingServletRequestParameterException` → falta un query param requerido.    
+* `HttpMessageNotReadableException` → JSON mal formado o tipos inválidos.    
+* `HttpRequestMethodNotSupportedException` → método no permitido (POST vs GET).    
+* `HttpMediaTypeNotSupportedException` / HttpMediaTypeNotAcceptableException → Content-Type o Accept inválidos.     
+* `NoHandlerFoundException` → 404 por ruta inexistente (solo si lo activás, ver abajo).        
+* `DataAccessException` (raíz, unchecked)    
+* `DataIntegrityViolationException` → violación de integridad (p. ej., UNIQUE/NOT NULL/FK).    
+* `DuplicateKeyException` (en algunos drivers) → clave duplicada.        
+* `AccessDeniedException` → 403.    
+* `ResponseStatusException` → lanzar un error HTTP sin crear exception custom.    
 
 En mi clase `HandlerException` comente algunas funciones para que se sepa de que trata cada una.
 
