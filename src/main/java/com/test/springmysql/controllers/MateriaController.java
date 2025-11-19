@@ -1,6 +1,8 @@
 package com.test.springmysql.controllers;
 
+import com.test.springmysql.dtos.ComisionDTO;
 import com.test.springmysql.dtos.MateriaDTO;
+import com.test.springmysql.entities.Comision;
 import com.test.springmysql.services.MateriaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -46,5 +48,11 @@ public class MateriaController {
     public ResponseEntity<?> update(@PathVariable("materiaId") Long id, @Valid @RequestBody MateriaDTO materiadto){
         MateriaDTO upd = materiaService.updateMateria(id,materiadto);
         return ResponseEntity.ok(upd);
+    }
+
+    @PostMapping("/{materiaId}/comisiones")
+    public ResponseEntity<?> createComision(@PathVariable("materiaId") Long id,@Valid @RequestBody ComisionDTO comision){
+        ComisionDTO result = materiaService.createComision(id,comision);
+        return ResponseEntity.ok(result);
     }
 }

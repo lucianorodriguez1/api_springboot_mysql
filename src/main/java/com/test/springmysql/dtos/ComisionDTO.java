@@ -1,67 +1,51 @@
 package com.test.springmysql.dtos;
 
-import com.test.springmysql.entities.Estudiante;
-import com.test.springmysql.entities.Materia;
-import com.test.springmysql.entities.Profesor;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComisionDTO {
 
     private long id;
-    @NotNull
-    @NotEmpty
-    private Materia materia;
+    private Long materiaId;
 
     @PositiveOrZero
+    @NotNull
     private int alumnos_permitidos;
 
-    private List<Estudiante> estudiantes;
-    private List<Profesor> profesores;
+    private List<Long> estudiantesId = new ArrayList<>();
+    private List<Long> profesoresId = new ArrayList<>();
+
+    @NotNull
     private LocalDate fecha_inicio;
+
+    @NotNull
     private LocalDate fecha_final;
+
+    @NotNull
     private LocalTime hora_inicio;
+
+    @NotNull
     private LocalTime hora_final;
 
     public ComisionDTO() {
-    }
-
-    public Materia getMateria() {
-        return materia;
     }
 
     public int getAlumnos_permitidos() {
         return alumnos_permitidos;
     }
 
-    public List<Estudiante> getEstudiantes() {
-        return estudiantes;
-    }
-
-    public List<Profesor> getProfesores() {
-        return profesores;
-    }
-
-    public void setMateria(Materia materia) {
-        this.materia = materia;
-    }
 
     public void setAlumnos_permitidos(int alumnos_permitidos) {
         this.alumnos_permitidos = alumnos_permitidos;
     }
 
-    public void setEstudiantes(List<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
-    }
-
-    public void setProfesores(List<Profesor> profesores) {
-        this.profesores = profesores;
-    }
 
     public LocalDate getFecha_inicio() {
         return fecha_inicio;
@@ -101,5 +85,29 @@ public class ComisionDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Long getMateriaId() {
+        return materiaId;
+    }
+
+    public void setMateriaId(Long materiaId) {
+        this.materiaId = materiaId;
+    }
+
+    public List<Long> getEstudiantesId() {
+        return estudiantesId;
+    }
+
+    public void setEstudiantesId(List<Long> estudiantesId) {
+        this.estudiantesId = estudiantesId;
+    }
+
+    public List<Long> getProfesoresId() {
+        return profesoresId;
+    }
+
+    public void setProfesoresId(List<Long> profesoresId) {
+        this.profesoresId = profesoresId;
     }
 }

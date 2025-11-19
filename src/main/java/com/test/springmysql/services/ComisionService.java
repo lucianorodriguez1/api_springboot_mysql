@@ -17,6 +17,7 @@ public class ComisionService {
     public ComisionService(ComisionRepository comisionRepository) {
         this.comisionRepository = comisionRepository;
     }
+
     public List<ComisionDTO> getComisiones(){
         return comisionRepository.findAll().stream()
                 .map(c -> mapper.map(c, ComisionDTO.class)).toList();
@@ -45,7 +46,6 @@ public class ComisionService {
         c.setAlumnos_permitidos(comisiondto.getAlumnos_permitidos());
         c.setFecha_final(comisiondto.getFecha_final());
         c.setFecha_inicio(comisiondto.getFecha_inicio());
-        c.setMateria(comisiondto.getMateria());
 
         Comision saved = comisionRepository.save(c);
         return mapper.map(saved, ComisionDTO.class);
