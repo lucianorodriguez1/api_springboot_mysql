@@ -16,12 +16,19 @@ import java.util.Map;
 @RestControllerAdvice
 public class HandlerException {
 
-    //controlador por si no se encuentra el recurso.
     @ExceptionHandler(RecursoNoEncontrado.class)
     public ResponseEntity<ApiResponse> handleRecursoNoEncontradoException(RecursoNoEncontrado exception, WebRequest webRequest){
         ApiResponse apiResponse = new ApiResponse(exception.getMessage(),webRequest.getDescription(false));
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
     }
+
+
+    public ResponseEntity<ApiResponse> handleEstudianteYaExisteEnComision(EstudianteYaExisteEnComision exception, WebRequest webRequest){
+        ApiResponse apiResponse = new ApiResponse(exception.getMessage(),webRequest.getDescription(false));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
+    }
+
+
     //controlador de excepcion para que se valide el @Valid
     //en las clases
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -38,11 +45,15 @@ public class HandlerException {
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
 
+
+
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ApiResponse> handleBadRequestException(BadRequestException exception, WebRequest webRequest){
         ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
+
+
 
     //controla los errores globales de los path en 404
     @ExceptionHandler(NoHandlerFoundException.class)
@@ -52,6 +63,8 @@ public class HandlerException {
         return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
     }
 
+
+
     //controla los errores de varios tipos y globalizrlo con un error 500
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleException(Exception exception, WebRequest webRequest){
@@ -60,4 +73,7 @@ public class HandlerException {
         ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
     }
+
+
+
 }
