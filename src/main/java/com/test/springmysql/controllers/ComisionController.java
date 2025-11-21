@@ -3,15 +3,17 @@ package com.test.springmysql.controllers;
 import com.test.springmysql.dtos.ComisionDTO;
 import com.test.springmysql.services.ComisionService;
 import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping(path = "api/v1/comisiones")
+
 public class ComisionController {
     private final ComisionService comisionService;
 
@@ -43,5 +45,9 @@ public class ComisionController {
         return ResponseEntity.ok(comisionService.updateComision(id, comisiondto));
     }
 
-
+    @PostMapping("/{comisionId}/estudiantes/{estudianteId}")
+    public ResponseEntity<Void> addStudent(@PathVariable("comisionId") Long cid,@PathVariable("estudianteId") Long eid){
+        comisionService.addStudent(cid,eid);
+        return ResponseEntity.ok().build();
+    }
 }

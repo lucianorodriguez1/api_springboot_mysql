@@ -3,6 +3,9 @@ package com.test.springmysql.dtos;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EstudianteDTO {
 
     private long id;
@@ -15,6 +18,7 @@ public class EstudianteDTO {
     @NotEmpty
     private String cuil;
 
+    private List<Long> comisionesId = new ArrayList<>();
 
     public EstudianteDTO() {
     }
@@ -41,5 +45,13 @@ public class EstudianteDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<Long> getComisionesId() {
+        return comisionesId;
+    }
+
+    public void setComisionesId(List<Long> comisionesId) {
+        this.comisionesId = comisionesId;
     }
 }

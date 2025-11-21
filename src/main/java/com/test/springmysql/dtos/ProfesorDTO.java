@@ -4,6 +4,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProfesorDTO {
     private long id;
     @NotEmpty
@@ -13,6 +16,7 @@ public class ProfesorDTO {
     @PositiveOrZero
     private int antiguedad_universidad;
 
+    private List<Long> comisionesId = new ArrayList<>();
 
     public ProfesorDTO() {
     }
@@ -39,5 +43,13 @@ public class ProfesorDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<Long> getComisionesId() {
+        return comisionesId;
+    }
+
+    public void setComisionesId(List<Long> comisionesId) {
+        this.comisionesId = comisionesId;
     }
 }
