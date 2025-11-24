@@ -1,8 +1,8 @@
 package com.test.springmysql.controllers;
 
 import com.test.springmysql.dtos.ComisionDTO;
-import com.test.springmysql.dtos.MateriaDTO;
-import com.test.springmysql.entities.Comision;
+import com.test.springmysql.dtos.MateriaDetailDTO;
+import com.test.springmysql.dtos.MateriaListDTO;
 import com.test.springmysql.services.MateriaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -22,19 +22,19 @@ public class MateriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MateriaDTO>> getAll() {
+    public ResponseEntity<List<MateriaListDTO>> getAll() {
         return ResponseEntity.ok(materiaService.getMaterias());
     }
 
     @GetMapping("/{materiaId}")
     public ResponseEntity<?> getById(@PathVariable("materiaId") Long materiaId) {
-        MateriaDTO materia = materiaService.getMateria(materiaId);
+        MateriaDetailDTO materia = materiaService.getMateria(materiaId);
         return  ResponseEntity.ok(materia);
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody MateriaDTO materiadto) {
-        MateriaDTO savedMateria = materiaService.createMateria(materiadto);
+    public ResponseEntity<?> create(@Valid @RequestBody MateriaListDTO materiadto) {
+        MateriaListDTO savedMateria = materiaService.createMateria(materiadto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMateria);
     }
 
@@ -45,8 +45,8 @@ public class MateriaController {
     }
 
     @PutMapping("/{materiaId}")
-    public ResponseEntity<?> update(@PathVariable("materiaId") Long id, @Valid @RequestBody MateriaDTO materiadto){
-        MateriaDTO upd = materiaService.updateMateria(id,materiadto);
+    public ResponseEntity<?> update(@PathVariable("materiaId") Long id, @Valid @RequestBody MateriaListDTO materiadto){
+        MateriaListDTO upd = materiaService.updateMateria(id,materiadto);
         return ResponseEntity.ok(upd);
     }
 

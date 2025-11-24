@@ -1,7 +1,8 @@
 package com.test.springmysql.services;
 
 import com.test.springmysql.dtos.ComisionDTO;
-import com.test.springmysql.dtos.MateriaDTO;
+import com.test.springmysql.dtos.MateriaDetailDTO;
+import com.test.springmysql.dtos.MateriaListDTO;
 import com.test.springmysql.entities.Comision;
 import com.test.springmysql.entities.Materia;
 import com.test.springmysql.exceptions.RecursoNoEncontrado;
@@ -9,7 +10,6 @@ import com.test.springmysql.repositories.ComisionRepository;
 import com.test.springmysql.repositories.MateriaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -26,10 +26,10 @@ public class MateriaService {
         this.comisionRepository = comisionRepository;
     }
 
-    public List<MateriaDTO> getMaterias() {
+    public List<MateriaListDTO> getMaterias() {
         return materiaRepository.findAll().stream().map(m -> {
 
-            MateriaDTO dto = mapper.map(m, MateriaDTO.class);
+            MateriaListDTO dto = mapper.map(m, MateriaListDTO.class);
 
             dto.setComisionesId(
                     m.getComisiones().stream().map(c->
@@ -42,16 +42,30 @@ public class MateriaService {
     }
 
 
-    public MateriaDTO getMateria(Long id) {
+    public MateriaDetailDTO getMateria(Long id) {
         Materia m = materiaRepository.findById(id)
                 .orElseThrow(()->new RecursoNoEncontrado("materia","id",id));
-        return mapper.map(m, MateriaDTO.class);
+        MateriaDetailDTO dto =  mapper.map(m, MateriaDetailDTO.class);
+
+        dto.setComisiones(m.getComisiones().stream()
+                .map(comision -> {
+                    ComisionDTO coDto =  mapper.map(comision, ComisionDTO.class);
+                    coDto.setEstudiantesId(comision.getEstudiantes().stream()
+                            .map(e->e.getId())
+                            .toList()
+                    );
+                    return coDto;
+                })
+                .toList()
+        );
+
+        return dto;
     }
 
-    public MateriaDTO createMateria(MateriaDTO materiadto) {
+    public MateriaListDTO createMateria(MateriaListDTO materiadto) {
         Materia materia = mapper.map(materiadto, Materia.class);
         Materia saved = materiaRepository.save(materia);
-        return mapper.map(saved, MateriaDTO.class);
+        return mapper.map(saved, MateriaListDTO.class);
     }
 
     public void deleteMateria(Long id) {
@@ -60,13 +74,13 @@ public class MateriaService {
         materiaRepository.deleteById(id);
     }
 
-    public MateriaDTO updateMateria(Long id, MateriaDTO dto){
+    public MateriaListDTO updateMateria(Long id, MateriaListDTO dto){
        Materia m = materiaRepository.findById(id)
                .orElseThrow(()->new RecursoNoEncontrado("materia","id",id));
 
         m.setNombre(dto.getNombre());
         Materia saved = materiaRepository.save(m);
-        return mapper.map(saved, MateriaDTO.class);
+        return mapper.map(saved, MateriaListDTO.class);
     }
 
     public ComisionDTO createComision(Long id,ComisionDTO comision){

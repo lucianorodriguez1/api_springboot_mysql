@@ -1,7 +1,6 @@
 # 🎓 Sistema estudiantil con Spring Boot y MySQL
 
-Proyecto CRUD que implementa un **sistema estudiantil** usando **Spring Boot**, **Spring Data JPA**, **MySQL** y validaciones con **DTOs**.
-Tiene como objetivo documentar buenas prácticas de estructura, manejo de errores, capas y uso de herramientas modernas.
+Sistema realizado con el objetivo de tener documentado la conexion de MySQL con Spring Boot.
 
 ⚠️ **Aclaración**: No se usa **Lombok**.
 
@@ -13,12 +12,12 @@ Tiene como objetivo documentar buenas prácticas de estructura, manejo de errore
 ---
 
 ## 📦 Dependencias
-* **spring-boot-starter-data-jpa** (ORM y repositorios)
-* **spring-boot-starter-web** (Spring Web, API REST)
-* **mysql-connector-j** (Desde el instalador se puede agregar MySQL Driver, Driver MySQL)
-* **spring-boot-starter-test** (Testing (JUnit + Spring Test))
-* **spring-boot-starter-validation** (agregar validaciones a los atributos de las clases, Validaciones con Bean Validation)
-* **modelmapper** (Conversión entre Entity y DTO)
+* spring-boot-starter-data-jpa 
+* spring-boot-starter-web (Spring Web)
+* mysql-connector-j (Desde el instalador se puede agregar MySQL Driver)
+* spring-boot-starter-test
+* spring-boot-starter-validation (agregar validaciones a los atributos de las clases)
+* modelmapper
 ---
 
 ## ⚙️ Variables de entorno
@@ -32,11 +31,6 @@ Ejemplo (`application.properties`):
 spring.datasource.url=${DB_URL}
 spring.datasource.username=${DB_USERNAME}
 spring.datasource.password=${DB_PASSWORD} 
-spring.application.name=springmysql
-#Visualizar las consultas
-spring.jpa.show-sql=true
-#Crear/actualiza las tablas de la base de datos. Puede ser update o create.
-spring.jpa.hibernate.ddl-auto=update
 ```
 
 ## 🚀 Pasos para ejecutar
@@ -46,7 +40,7 @@ spring.jpa.hibernate.ddl-auto=update
    > IntelliJ IDEA → `Edit Configuration -> Application -> Main Class -> Seleccionar archivo main`.
 4. Crear entidades en la carpeta `entities` con atributos, relaciones y anotaciones.
 5. Crear las carpetas `dto`, `services` y `controllers`.
-6. Crear las excepciones y  un DTO `ApiResponse` para devolver las respuestas en ese formato cuando pasa una excepcion.
+6. Crear las excepciones con un DTO `ApiResponse`.
 
 ---
 
@@ -56,93 +50,6 @@ spring.jpa.hibernate.ddl-auto=update
 - ✍️ Anotaciones de relaciones en Spring: [Mastering Database Relationship Annotations](https://medium.com/devdomain/mastering-spring-database-relationship-annotations-161cb8232619)
 - 📑 Documentación de `@Column`: [Jakarta Persistence API](https://jakarta.ee/specifications/persistence/2.2/apidocs/javax/persistence/column)
 
----
-## 🧱 Arquitectura del proyecto
-
-``` 
-.
-├── controllers/
-    ├── MateriaController.java
-
-├── dtos/
-    ├── ApiResponse.java
-    └── Materia.java
-   
-├── entities/
-    └── Materia.java
-├── exceptions/
-    └── HandlerException.java
-├── repositories/
-    └── MateriaRepository.java
-└── services/
-    ├── MateriaService.java
-
-``` 
----
-## 🗄 Entidades — Buenas prácticas
-
-Cada entidad debe incluir:
-
-✔ `@Entity`  
-✔ `@Table(name="...")` (opcional pero recomendado)  
-✔ ID autogenerado con `@Id` + `@GeneratedValue`  
-✔ Constructor vacío  
-✔ Getters y setters
-
-Ejemplo recomendado:
-
-```java
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private long id;
-```
-
----
-## 🧩 Buenas prácticas capa Controller-Service-Repository
-
-## ✔ Controller
-- Usa **DTOs** para request y response.
-- No debe acceder directamente a repositorios.
-- No debe devolver entidades del modelo (Entities).
-- Valida la entrada con `@Valid`.
-- Solo delega la lógica al service.
-
-## ✔ Service
-- Implementa las reglas de negocio reales.
-- Realiza la conversión DTO ↔ Entity.
-- Interactúa con repositorios.
-- Maneja errores con `orElseThrow()` para Optional.
-- No expone entidades directamente fuera del service.
-- Debe mantener métodos pequeños y específicos.
-
-## ✔ Repository
-- Solo trabaja con entidades.
-- No contiene lógica de negocio.
-- Puede definir métodos personalizados:
-  - Por nombre (`findByEmail`)
-  - Via `@Query`
-- Devuelve Optional en búsquedas por ID.
-
-
---- 
-
-## ⚠️ Notas importantes
-* Usar `@JsonIgnore` para evitar ciclos en relaciones bidireccionales.
-* En las clases de tipo **entities** :
-  *  comienzan con anotaciones `@Entity` y `@Table(name = "nombre_tabla")`
-  *  los ids van con `@Id` y `@GeneratedValue(strategy = GenerationType.IDENTITY)`.
-  * Se suele utilizar long en IDs y no int porque permite un mayor alcance para valores numericos.
-  * sU USA `@Column(name="nombre_columna")` si quiero cambiar el nombre del atributo
-  * Incluir siempre getters, setters y constructor vacío en entidades para Hibernate/JPA.
-* El literal `.class` se refiere al objeto de clase en Java (metainformación).
-* @Autowired nos ayuda con la inyeccion de un servicio a otro. Por ejemplo: `@Autowired` ` private final MateriaRepository materiaRepository;` nos dice que la clase que ya creamos MateriaRepository se inyecta en materiaRepository
-* No hace fata try/catch para lanzar excepciones porque si tenés una clase anotada con @RestControllerAdvice, esa clase “escucha” todas las excepciones lanzadas en los controladores. (tiene que estar un controlleradvice con exceptionhandler).
-* Acordarse que:
-  * El controller deberia usar DTOs (request y response).
-  * El service Puede usar DTOs hacia afuera (lo que ve el controller) y Entities hacia adentro (lo que guarda en repos).
-  * El repository solo trabaja con Entities.
-  * El uso de `ìsPresent` o `get` esta "deprecado". En cambio tendrias que usar el orElseThow. (se muestran ejemplos en los servicios donde los metodos del repositorio devuelven Optional en los servicios).
-  *
 ---
 
 ## 🏷️ @Column — Atributos principales
@@ -190,7 +97,24 @@ Además extiende `PagingAndSortingRepository` y `QueryByExampleExecutor`, habili
 
 ---
 
-
+## ⚠️ Notas importantes
+* Usar `@JsonIgnore` para evitar ciclos en relaciones bidireccionales.
+* En las clases de tipo **entities** : 
+  *  comienzan con anotaciones `@Entity` y `@Table(name = "nombre_tabla")`
+  *  los ids van con `@Id` y `@GeneratedValue(strategy = GenerationType.IDENTITY)`.  
+  * Se suele utilizar long en IDs y no int porque permite un mayor alcance para valores numericos.
+  * sU USA `@Column(name="nombre_columna")` si quiero cambiar el nombre del atributo
+  * Incluir siempre getters, setters y constructor vacío en entidades para Hibernate/JPA.
+* El literal `.class` se refiere al objeto de clase en Java (metainformación).
+* @Autowired nos ayuda con la inyeccion de un servicio a otro. Por ejemplo: `@Autowired` ` private final MateriaRepository materiaRepository;` nos dice que la clase que ya creamos MateriaRepository se inyecta en materiaRepository
+* No hace fata try/catch para lanzar excepciones porque si tenés una clase anotada con @RestControllerAdvice, esa clase “escucha” todas las excepciones lanzadas en los controladores. (tiene que estar un controlleradvice con exceptionhandler).
+* Acordarse que:
+  * El controller deberia usar DTOs (request y response).
+  * El service Puede usar DTOs hacia afuera (lo que ve el controller) y Entities hacia adentro (lo que guarda en repos).
+  * El repository solo trabaja con Entities.
+  * El uso de `ìsPresent` o `get` esta "deprecado". En cambio tendrias que usar el orElseThow. (se muestran ejemplos en los servicios donde los metodos del repositorio devuelven Optional en los servicios).
+  * 
+---
 
 ## 🛑 Manejo de Excepciones
 1. Crear paquete `exceptions`.
@@ -244,6 +168,9 @@ public class RecursoNoEncontrado extends RuntimeException{
 
 Ejemplo de configuración en `application.properties` para rutas inexistentes:
 ```properties
+spring.mvc.throw-exception-if-no-handler-found=true
+spring.web.resources.add-mappings=false
+
 // Si queremos poner una excepcion por si una ruta es inexiste podemos poner esto en aplication.properties:
 // Si se debe lanzar una "NoHandlerFoundException" si no se encontró ningún controlador para procesar una solicitud.
 spring.mvc.throw-exception-if-no-handler-found=true
@@ -254,168 +181,36 @@ spring.web.resources.add-mappings=false
 ```
 
 ### EXCEPCIONES DE SPRING POR DEFECTO
-* `MethodArgumentNotValidException` → fallan validaciones de @Valid en body (DTO).  
-* `BindException` → fallan binds de formularios/params.  
-* `ConstraintViolationException` → validación de @Validated en path/query params.    
-* `MethodArgumentTypeMismatchException` → tipo incompatible en path/query (ej: id no numérico).    
-* `MissingServletRequestParameterException` → falta un query param requerido.    
-* `HttpMessageNotReadableException` → JSON mal formado o tipos inválidos.    
-* `HttpRequestMethodNotSupportedException` → método no permitido (POST vs GET).    
-* `HttpMediaTypeNotSupportedException` / HttpMediaTypeNotAcceptableException → Content-Type o Accept inválidos.     
-* `NoHandlerFoundException` → 404 por ruta inexistente (solo si lo activás, ver abajo).        
-* `DataAccessException` (raíz, unchecked)    
-* `DataIntegrityViolationException` → violación de integridad (p. ej., UNIQUE/NOT NULL/FK).    
-* `DuplicateKeyException` (en algunos drivers) → clave duplicada.        
-* `AccessDeniedException` → 403.    
-* `ResponseStatusException` → lanzar un error HTTP sin crear exception custom.    
+`MethodArgumentNotValidException` → fallan validaciones de @Valid en body (DTO).  
+`BindException` → fallan binds de formularios/params.  
+`ConstraintViolationException` → validación de @Validated en path/query params.    
+`MethodArgumentTypeMismatchException` → tipo incompatible en path/query (ej: id no numérico).    
+`MissingServletRequestParameterException` → falta un query param requerido.    
+`HttpMessageNotReadableException` → JSON mal formado o tipos inválidos.    
+`HttpRequestMethodNotSupportedException` → método no permitido (POST vs GET).    
+`HttpMediaTypeNotSupportedException` / HttpMediaTypeNotAcceptableException → Content-Type o Accept inválidos.     
+`NoHandlerFoundException` → 404 por ruta inexistente (solo si lo activás, ver abajo).        
+`DataAccessException` (raíz, unchecked)    
+`DataIntegrityViolationException` → violación de integridad (p. ej., UNIQUE/NOT NULL/FK).    
+`DuplicateKeyException` (en algunos drivers) → clave duplicada.        
+`AccessDeniedException` → 403.    
+`AuthenticationException` → 401.     
+`ResponseStatusException` → lanzar un error HTTP sin crear exception custom.    
 
 En mi clase `HandlerException` comente algunas funciones para que se sepa de que trata cada una.
 
----
+## Swagger
 
-# TEST
-
-## JUNIT
-* Usar el directorio `test`.
-* Tener el mismo direvtorio que main.
-* En los test unitarios siempre voy a trabajar con valor esperado y 
-valor actual (valor que el metodo me devolvio).
-* Lo que hace Junit es comprar el valor esperado con el valor actual.
-* Por defecto, los test unitarios pasan.
-* La estructura que se suele usar en test unitario es **given** (se suele tener las variables listas) **when** (se ejecuta el metodo) 
-y **then** (evaluamos el resultado del metodo).
-* Los metodos son de tipo void y cada uno tiene una anotacion @Test
-* Opcionalmente puedo instalar un plugin llamado jacoco para ver la cobertura de mis test
-* La calidad del test suele estar entre 85 - 95.
-* Cuando queremos probar una funcion de error creamos otra metodo con una palabra 
-Error agregado al final del nombre del metodo. Y dentro del metodo
-no suele ir el **when** si no que se coloca directamente el assertThrow
-* Podemos configurar un metodo para que se ejecute antes de todos los tests 
-con `@BeforeEach `
-* @Para poner nombre al test es con **@DisplayName** arriba de **@Test**
-
-
-## TIPOS DE ASSERTIONS
-* assertEquals(vEsperado,vActual) : sirve para evaluar un valor esperado con el valor actual.
-* assertTrue() : valida que tenga un verdadero
-* assertFalse()
-* assertNotNull() : valida que el objeto no sea nulo
-* assertInstanceOf(vEsperado,vActual) : valida el tipo de objeto que tengo
-* assertThrow() : valida excepciones.
-
-
-## MOCKITO
-* Agregamos la dependencia mockito : **mockito-junit-jupiter**
-* Mockito es simular objetos y trabaja con las dependencia y no la clase que estoy testeando.
-* Arriba de la **clase** a testear ponemos `@ExtendWith(MockitoExtension.class)`, 
-`@Mock` en la clase dependencia a simular y `@InjectMocks` en la clase a testear. 
-* HAY VARIAS FORMAS DE INSERTAR MOCKITO. Anteriormente menciona una de esas formas.
-* `verify` se usa con la dependencia.
-* `ArgumentCaptur<Dato>` sirve para capturar el objeto y validarlo.
-
-*Repositorio de ejemplo* : http://github.com/hamvocke/spring-testing/blob/main/src/test/java/example/ExampleControllerAPITest.java 
-*Video mostrando* test de controlador: https://www.youtube.com/watch?v=9-mX5MACs5U
-*Repositorio de test de controlador*: http://github.com/sharathbabugv/tutorial-learn/blob/master/src/test/java/com/codestorm/learn/junit_one/TestControllerOneTest.java 
-
-```java
-package com.test.springmysql.controller;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.springmysql.dto.MateriaDTO;
-import com.test.springmysql.exceptions.RecursoNoEncontrado;
-import com.test.springmysql.service.MateriaService;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.doThrow;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-@WebMvcTest(controllers = MateriaController.class)
-class MateriaControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private MateriaService materiaService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Test
-    @DisplayName("POST /api/v1/materias → creado con éxito")
-    void createMateria_success() throws Exception {
-        MateriaDTO dto = new MateriaDTO();
-        dto.setNombre("Matemática");
-
-        when(materiaService.createMateria(ArgumentMatchers.any(MateriaDTO.class)))
-                .thenReturn(dto);
-
-        mockMvc.perform(post("/api/v1/materias")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isCreated())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.nombre").value("Matemática"));
-    }
-
-    @Test
-    @DisplayName("POST /api/v1/materias → error de validación nombre vacío")
-    void createMateria_validationError() throws Exception {
-        MateriaDTO dto = new MateriaDTO();
-        dto.setNombre("");  // nombre inválido
-
-        mockMvc.perform(post("/api/v1/materias")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("GET /api/v1/materias/{id} → éxito")
-    void getMateria_success() throws Exception {
-        Long id = 1L;
-        MateriaDTO dto = new MateriaDTO();
-        dto.setNombre("Historia");
-
-        when(materiaService.getMateria(id)).thenReturn(dto);
-
-        mockMvc.perform(get("/api/v1/materias/{id}", id)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nombre").value("Historia"));
-    }
-
-    @Test
-    @DisplayName("GET /api/v1/materias/{id} → no encontrada")
-    void getMateria_notFound() throws Exception {
-        Long id = 99L;
-
-        when(materiaService.getMateria(id))
-                .thenThrow(new RecursoNoEncontrado("materia", "id", id));
-
-        mockMvc.perform(get("/api/v1/materias/{id}", id)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    @DisplayName("DELETE /api/v1/materias/{id} → sin contenido")
-    void deleteMateria_success() throws Exception {
-        Long id = 1L;
-
-        mockMvc.perform(delete("/api/v1/materias/{id}", id))
-                .andExpect(status().isNoContent());
-    }
-}
-
+Link de la docu de swagger : https://springdoc.org/ 
+1. Instalar dependencia: 
+```xml
+  <dependency>
+    <groupId>org.springdoc</groupId>
+	<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	<version>2.8.14</version>
+  </dependency>
 ```
----
+2. Entrar a la url:
+```
+http://localhost:8080/swagger-ui.html
+```

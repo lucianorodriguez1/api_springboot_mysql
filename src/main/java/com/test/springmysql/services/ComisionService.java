@@ -3,6 +3,7 @@ package com.test.springmysql.services;
 import com.test.springmysql.dtos.ComisionDTO;
 import com.test.springmysql.entities.Comision;
 import com.test.springmysql.entities.Estudiante;
+import com.test.springmysql.exceptions.EstudianteYaExisteEnComision;
 import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.ComisionRepository;
 import com.test.springmysql.repositories.EstudianteRepository;
@@ -69,6 +70,12 @@ public class ComisionService {
         Estudiante e = estudianteRepository.findById(eid)
                 .orElseThrow(()-> new RecursoNoEncontrado("estudiante","id",eid));
 
+        boolean existe = c.getEstudiantes().stream()
+                .anyMatch(est -> est.getId()== eid);
+
+        if (existe) {
+            throw new EstudianteYaExisteEnComision(e.getId(),c.getId());
+        }
         c.getEstudiantes().add(e);
         comisionRepository.save(c);
     }
