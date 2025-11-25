@@ -594,3 +594,15 @@ class MateriaControllerTest {
 
 ```
 ---
+
+### Para ver el reporte de los tests :
+1. Agregar ``@Disabled`` en la clase de ``SpringmysqlApplicationTests`` (Con eso, Maven ya no intenta levantar el contexto y tus otros tests sí van a correr y generar reporte.)
+2. Voy al maven
+3. Hago click en la opcion que tiene el nombre del proyecto.
+4. Hago click en clean
+5. Hago click en test y se genera el reporte de los test
+6. Hago click en site
+7. Luego voy a la carpeta /target/site/index.html
+
+### Arreglar error de java machine que aprece en consola
+**PROXIMAMENTE**
