@@ -1,12 +1,13 @@
-package com.test.springmysql.dtos;
+package com.test.springmysql.dtos.estudiantes;
 
+import com.test.springmysql.dtos.comisiones.ComisionResumenDTO;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EstudianteDTO {
+public class EstudianteListDTO {
 
     private long id;
 
@@ -18,9 +19,9 @@ public class EstudianteDTO {
     @NotEmpty
     private String cuil;
 
-    private List<Long> comisionesId = new ArrayList<>();
+    private List<ComisionResumenDTO> comisiones = new ArrayList<>();
 
-    public EstudianteDTO() {
+    public EstudianteListDTO() {
     }
 
     public String getNombre() {
@@ -47,11 +48,11 @@ public class EstudianteDTO {
         this.id = id;
     }
 
-    public List<Long> getComisionesId() {
-        return comisionesId;
+    public List<ComisionResumenDTO> getComisiones() {
+        return comisiones;
     }
 
-    public void setComisionesId(List<Long> comisionesId) {
-        this.comisionesId = comisionesId;
+    public void setComisiones(List<ComisionResumenDTO> comisiones) {
+        this.comisiones = comisiones;
     }
 }

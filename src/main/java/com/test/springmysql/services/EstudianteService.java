@@ -1,6 +1,7 @@
 package com.test.springmysql.services;
 
-import com.test.springmysql.dtos.EstudianteDTO;
+import com.test.springmysql.dtos.comisiones.ComisionResumenDTO;
+import com.test.springmysql.dtos.estudiantes.EstudianteListDTO;
 import com.test.springmysql.entities.Estudiante;
 import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.EstudianteRepository;
@@ -19,23 +20,42 @@ public class EstudianteService {
         this.estudianteRepository = estudianteRepository;
     }
 
-    public List<EstudianteDTO> getEstudiantes() {
+    public List<EstudianteListDTO> getEstudiantes() {
         return estudianteRepository.findAll()
                 .stream()
-                .map(e->mapper.map(e, EstudianteDTO.class)).toList();
+                .map(estudiante -> {
+                    EstudianteListDTO e = new EstudianteListDTO();
+                    e.setId(estudiante.getId());
+                    e.setNombre(estudiante.getNombre());
+                    e.setCuil(estudiante.getCuil());
+                    e.setComisiones(estudiante.getComisiones().stream().map(comision -> {
+                        ComisionResumenDTO ec = new ComisionResumenDTO();
+                        ec.setId(comision.getId());
+                        ec.setNombre_materia(comision.getMateria().getNombre());
+                        return ec;
+                    }).toList());
 
+                    return e;
+                }).toList();
     }
 
-    public EstudianteDTO getEstudiante(Long id) {
+    public EstudianteListDTO getEstudiante(Long id) {
         Estudiante e = estudianteRepository.findById(id)
                 .orElseThrow(()-> new RecursoNoEncontrado("estudiante","id",id));
-        return mapper.map(e, EstudianteDTO.class);
+        EstudianteListDTO el =  mapper.map(e, EstudianteListDTO.class);
+        el.setComisiones(e.getComisiones().stream().map(comision -> {
+            ComisionResumenDTO ec = new ComisionResumenDTO();
+            ec.setId(comision.getId());
+            ec.setNombre_materia(comision.getMateria().getNombre());
+            return ec;
+        }).toList());
+        return el;
     }
 
-    public EstudianteDTO createEstudiante(EstudianteDTO dto) {
+    public EstudianteListDTO createEstudiante(EstudianteListDTO dto) {
         Estudiante e = mapper.map(dto, Estudiante.class);
         Estudiante saved = estudianteRepository.save(e);
-        return mapper.map(saved, EstudianteDTO.class);
+        return mapper.map(saved, EstudianteListDTO.class);
     }
 
     public void deleteEstudiante(Long id) {
@@ -44,12 +64,12 @@ public class EstudianteService {
         estudianteRepository.deleteById(id);
     }
 
-    public EstudianteDTO updateEstudiante(Long id, EstudianteDTO dto) {
+    public EstudianteListDTO updateEstudiante(Long id, EstudianteListDTO dto) {
         Estudiante e = estudianteRepository.findById(id)
                         .orElseThrow(()->new RecursoNoEncontrado("estudiante","id",id));
         e.setNombre(dto.getNombre());
         e.setCuil(dto.getCuil());
         Estudiante saved = estudianteRepository.save(e);
-        return mapper.map(saved, EstudianteDTO.class);
+        return mapper.map(saved, EstudianteListDTO.class);
     }
 }

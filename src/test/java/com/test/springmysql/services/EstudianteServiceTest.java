@@ -1,6 +1,6 @@
 package com.test.springmysql.services;
 
-import com.test.springmysql.dtos.EstudianteDTO;
+import com.test.springmysql.dtos.estudiantes.EstudianteListDTO;
 import com.test.springmysql.entities.Estudiante;
 import com.test.springmysql.repositories.EstudianteRepository;
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
@@ -52,7 +51,7 @@ public class EstudianteServiceTest {
         when(estudianteRepository.findAll()).thenReturn(List.of(e1, e2, e3));
 
         //when
-        List<EstudianteDTO> result = estudianteService.getEstudiantes();
+        List<EstudianteListDTO> result = estudianteService.getEstudiantes();
         //then
         assertNotNull(result);
         assertEquals(3, result.size());
@@ -82,7 +81,7 @@ public class EstudianteServiceTest {
         when(estudianteRepository.findById(1L)).thenReturn(Optional.of(e1));
 
         //when
-        EstudianteDTO result = estudianteService.getEstudiante(e1.getId());
+        EstudianteListDTO result = estudianteService.getEstudiante(e1.getId());
         //then
         assertNotNull(result);
         assertEquals("luciano", result.getNombre());
@@ -103,7 +102,7 @@ public class EstudianteServiceTest {
         e1.setCuil("23434");
         e1.setComisiones(null);
 
-        EstudianteDTO edto = new EstudianteDTO();
+        EstudianteListDTO edto = new EstudianteListDTO();
         edto.setNombre("luciano");
         edto.setCuil("23434");
 
@@ -121,7 +120,7 @@ public class EstudianteServiceTest {
         when(estudianteRepository.save(any(Estudiante.class))).thenReturn(e1);
 
         //when
-        EstudianteDTO result = estudianteService.createEstudiante(edto);
+        EstudianteListDTO result = estudianteService.createEstudiante(edto);
 
         //then
         assertNotNull(result);
@@ -140,7 +139,7 @@ public class EstudianteServiceTest {
         e1.setCuil("23434");
         e1.setComisiones(null);
 
-        EstudianteDTO edto = new EstudianteDTO();
+        EstudianteListDTO edto = new EstudianteListDTO();
         edto.setNombre("camilo");
         edto.setCuil("23434");
 
@@ -149,7 +148,7 @@ public class EstudianteServiceTest {
 
 
         //when
-        EstudianteDTO result = estudianteService.updateEstudiante(1L,edto);
+        EstudianteListDTO result = estudianteService.updateEstudiante(1L,edto);
 
         //then
         assertNotNull(result);

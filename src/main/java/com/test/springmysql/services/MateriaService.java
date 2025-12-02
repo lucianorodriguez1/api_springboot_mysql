@@ -1,8 +1,9 @@
 package com.test.springmysql.services;
 
-import com.test.springmysql.dtos.ComisionDTO;
-import com.test.springmysql.dtos.MateriaDetailDTO;
-import com.test.springmysql.dtos.MateriaListDTO;
+import com.test.springmysql.dtos.comisiones.ComisionListDTO;
+import com.test.springmysql.dtos.materias.MateriaComisionDTO;
+import com.test.springmysql.dtos.materias.MateriaDetailDTO;
+import com.test.springmysql.dtos.materias.MateriaListDTO;
 import com.test.springmysql.entities.Comision;
 import com.test.springmysql.entities.Materia;
 import com.test.springmysql.exceptions.RecursoNoEncontrado;
@@ -28,9 +29,8 @@ public class MateriaService {
 
     public List<MateriaListDTO> getMaterias() {
         return materiaRepository.findAll().stream().map(m -> {
-
             MateriaListDTO dto = mapper.map(m, MateriaListDTO.class);
-
+            //CODIGO PARA SETEAR LOS IDS DE COMISIONES EN MATERIA
             dto.setComisionesId(
                     m.getComisiones().stream().map(c->
                             c.getId())
@@ -47,6 +47,8 @@ public class MateriaService {
                 .orElseThrow(()->new RecursoNoEncontrado("materia","id",id));
         MateriaDetailDTO dto =  mapper.map(m, MateriaDetailDTO.class);
 
+        /*
+        //codigo para setear los estudiantes con id en cada comision
         dto.setComisiones(m.getComisiones().stream()
                 .map(comision -> {
                     ComisionDTO coDto =  mapper.map(comision, ComisionDTO.class);
@@ -58,6 +60,22 @@ public class MateriaService {
                 })
                 .toList()
         );
+
+        */
+
+        dto.setComisiones(m.getComisiones().stream()
+                    .map(comision -> {
+                        MateriaComisionDTO mc = new MateriaComisionDTO();
+                        mc.setId(comision.getId());
+                        mc.setAlumnos_permitidos(comision.getAlumnos_permitidos());
+                        mc.setFecha_inicio(comision.getFecha_inicio());
+                        mc.setFecha_final(comision.getFecha_final());
+                        mc.setHora_inicio(comision.getHora_inicio());
+                        mc.setHora_final(comision.getHora_final());
+                        return mc;
+                    })
+                    .toList()
+            );
 
         return dto;
     }
@@ -83,13 +101,13 @@ public class MateriaService {
         return mapper.map(saved, MateriaListDTO.class);
     }
 
-    public ComisionDTO createComision(Long id,ComisionDTO comision){
+    public ComisionListDTO createComision(Long id, ComisionListDTO comision){
         Materia m = materiaRepository.findById(id)
                 .orElseThrow(()->new RecursoNoEncontrado("materia","id",id));
         Comision c = mapper.map(comision, Comision.class);
         c.setMateria(m);
         Comision saved = comisionRepository.save(c);
-        return mapper.map(saved, ComisionDTO.class);
+        return mapper.map(saved, ComisionListDTO.class);
     }
 
 

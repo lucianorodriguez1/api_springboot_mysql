@@ -1,4 +1,4 @@
-package com.test.springmysql.dtos;
+package com.test.springmysql.dtos.materias;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ public class MateriaDetailDTO {
 
     private long id;
     private String nombre;
-    private List<ComisionDTO> comisiones;
+    private List<MateriaComisionDTO> comisiones;
 
     public MateriaDetailDTO() {
     }
@@ -25,11 +25,11 @@ public class MateriaDetailDTO {
     }
 
 
-    public List<ComisionDTO> getComisiones() {
+    public List<MateriaComisionDTO> getComisiones() {
         return comisiones;
     }
 
-    public void setComisiones(List<ComisionDTO> comisiones) {
+    public void setComisiones(List<MateriaComisionDTO> comisiones) {
         this.comisiones = comisiones;
     }
 }

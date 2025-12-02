@@ -1,6 +1,7 @@
 package com.test.springmysql.services;
 
-import com.test.springmysql.dtos.ProfesorDTO;
+import com.test.springmysql.dtos.comisiones.ComisionResumenDTO;
+import com.test.springmysql.dtos.profesores.ProfesorListDTO;
 import com.test.springmysql.entities.Profesor;
 import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.ProfesorRepository;
@@ -19,25 +20,50 @@ public class ProfesorService {
         this.profesorRepository = profesorRepository;
     }
 
-    public List<ProfesorDTO> getProfesores(){
-        return profesorRepository.findAll().stream().map(p->mapper.map(p, ProfesorDTO.class)).toList();
+    public List<ProfesorListDTO> getProfesores(){
+        return profesorRepository.findAll().stream()
+                .map(profesor -> {
+                    ProfesorListDTO pl = new ProfesorListDTO();
+                    pl.setAntiguedad_universidad(profesor.getAntiguedad_universidad());
+                    pl.setId(profesor.getId());
+                    pl.setNombre(profesor.getNombre());
+                    pl.setComisiones(profesor.getComisiones().stream()
+                            .map(comision -> {
+                                ComisionResumenDTO cr = new ComisionResumenDTO();
+                                cr.setId(comision.getId());
+                                cr.setNombre_materia(comision.getMateria().getNombre());
+                                return cr;
+                            }).toList());
+                    return pl;
+                }).toList();
     }
-    public ProfesorDTO getProfesor(Long id){
-        Profesor p = profesorRepository.findById(id)
+    public ProfesorListDTO getProfesor(Long id){
+        Profesor profesor = profesorRepository.findById(id)
                 .orElseThrow(()->new RecursoNoEncontrado("profesor", "id", id));
-        return mapper.map(p, ProfesorDTO.class);
+        ProfesorListDTO pl = new ProfesorListDTO();
+        pl.setAntiguedad_universidad(profesor.getAntiguedad_universidad());
+        pl.setId(profesor.getId());
+        pl.setNombre(profesor.getNombre());
+        pl.setComisiones(profesor.getComisiones().stream()
+                .map(comision -> {
+                    ComisionResumenDTO cr = new ComisionResumenDTO();
+                    cr.setId(comision.getId());
+                    cr.setNombre_materia(comision.getMateria().getNombre());
+                    return cr;
+                }).toList());
+        return pl;
     }
-    public ProfesorDTO createProfesor(ProfesorDTO profesordto){
+    public ProfesorListDTO createProfesor(ProfesorListDTO profesordto){
         Profesor p = mapper.map(profesordto,Profesor.class);
         Profesor saved =  profesorRepository.save(p);
-        return mapper.map(saved, ProfesorDTO.class);
+        return mapper.map(saved, ProfesorListDTO.class);
     }
     public void deleteProfesor(Long id){
         profesorRepository.findById(id)
                 .orElseThrow(()->new RecursoNoEncontrado("profesor", "id", id));
         profesorRepository.deleteById(id);
     }
-    public ProfesorDTO updateProfesor(Long id, ProfesorDTO profesordto){
+    public ProfesorListDTO updateProfesor(Long id, ProfesorListDTO profesordto){
         Profesor p = profesorRepository.findById(id)
                 .orElseThrow(()->new RecursoNoEncontrado("profesor", "id", id));
 
@@ -45,7 +71,7 @@ public class ProfesorService {
         p.setAntiguedad_universidad(profesordto.getAntiguedad_universidad());
 
         Profesor saved = profesorRepository.save(p);
-        return mapper.map(saved, ProfesorDTO.class);
+        return mapper.map(saved, ProfesorListDTO.class);
     }
 
 }

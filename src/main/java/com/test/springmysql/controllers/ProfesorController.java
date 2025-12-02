@@ -1,6 +1,6 @@
 package com.test.springmysql.controllers;
 
-import com.test.springmysql.dtos.ProfesorDTO;
+import com.test.springmysql.dtos.profesores.ProfesorListDTO;
 import com.test.springmysql.services.ProfesorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,12 @@ public class ProfesorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProfesorDTO>> getAll(){
+    public ResponseEntity<List<ProfesorListDTO>> getAll(){
         return ResponseEntity.ok(profesorService.getProfesores());
     }
 
     @PostMapping
-    public ResponseEntity<ProfesorDTO> create(@Valid @RequestBody ProfesorDTO profesordto){
+    public ResponseEntity<ProfesorListDTO> create(@Valid @RequestBody ProfesorListDTO profesordto){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(profesorService.createProfesor(profesordto));
@@ -32,7 +32,7 @@ public class ProfesorController {
 
     @GetMapping("/{profesorId}")
     public ResponseEntity<?> getById(@PathVariable("profesorId") Long id){
-       ProfesorDTO p = profesorService.getProfesor(id);
+       ProfesorListDTO p = profesorService.getProfesor(id);
         return ResponseEntity.ok(p);
     }
     @DeleteMapping("/{profesorId}")
@@ -42,7 +42,7 @@ public class ProfesorController {
     }
 
     @PutMapping("/{profesorId}")
-    public ResponseEntity<?> update(@PathVariable("profesorId") Long id, @Valid @RequestBody ProfesorDTO profesordto){
+    public ResponseEntity<?> update(@PathVariable("profesorId") Long id, @Valid @RequestBody ProfesorListDTO profesordto){
         return ResponseEntity.ok(profesorService.updateProfesor(id, profesordto));
     }
 

@@ -1,6 +1,6 @@
 package com.test.springmysql.controllers;
 
-import com.test.springmysql.dtos.EstudianteDTO;
+import com.test.springmysql.dtos.estudiantes.EstudianteListDTO;
 import com.test.springmysql.services.EstudianteService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -19,17 +19,17 @@ public class EstudianteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EstudianteDTO>> getAll(){
+    public ResponseEntity<List<EstudianteListDTO>> getAll(){
         return ResponseEntity.ok(estudianteService.getEstudiantes());
     }
 
     @PostMapping
-    public ResponseEntity<EstudianteDTO> create(@Valid @RequestBody EstudianteDTO estudiantedto){
+    public ResponseEntity<EstudianteListDTO> create(@Valid @RequestBody EstudianteListDTO estudiantedto){
         return ResponseEntity.status(HttpStatus.CREATED).body(estudianteService.createEstudiante(estudiantedto));
     }
 
     @GetMapping("/{estudianteId}")
-    public ResponseEntity<EstudianteDTO> getById(@PathVariable("estudianteId") Long estudianteId){
+    public ResponseEntity<EstudianteListDTO> getById(@PathVariable("estudianteId") Long estudianteId){
         return ResponseEntity.ok(estudianteService.getEstudiante(estudianteId));
     }
 
@@ -39,7 +39,7 @@ public class EstudianteController {
     }
 
     @PutMapping("/{estudianteId}")
-    public ResponseEntity<EstudianteDTO> update(@PathVariable("estudianteId")Long id,@Valid @RequestBody EstudianteDTO estudiantedto){
+    public ResponseEntity<EstudianteListDTO> update(@PathVariable("estudianteId")Long id, @Valid @RequestBody EstudianteListDTO estudiantedto){
         return ResponseEntity.ok(estudianteService.updateEstudiante(id,estudiantedto));
     }
 
