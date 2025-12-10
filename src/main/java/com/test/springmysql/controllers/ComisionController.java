@@ -26,10 +26,13 @@ public class ComisionController {
         return ResponseEntity.ok(comisionService.getComisiones());
     }
 
+    /*
     @PostMapping
     public ResponseEntity<ComisionListDTO> create(@Valid @RequestBody ComisionListDTO comisiondto){
         return ResponseEntity.status(HttpStatus.CREATED).body(comisionService.createComision(comisiondto));
     }
+
+     */
 
     @GetMapping("/{comisionId}")
     public ResponseEntity<ComisionDetailDTO> getById(@PathVariable("comisionId") Long id){
