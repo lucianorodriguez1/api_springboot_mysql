@@ -28,12 +28,6 @@
 
 ## ⚠️ Notas importantes
 * Usar `@JsonIgnore` para evitar ciclos en relaciones bidireccionales.
-* En las clases de tipo **entities** :
-    *  comienzan con anotaciones `@Entity` y `@Table(name = "nombre_tabla")`
-    *  los ids van con `@Id` y `@GeneratedValue(strategy = GenerationType.IDENTITY)`.
-    * Se suele utilizar long en IDs y no int porque permite un mayor alcance para valores numericos.
-    * Se usa `@Column(name="nombre_columna")` si quiero cambiar el nombre del atributo
-    * Incluir siempre getters, setters y constructor vacío en entidades para Hibernate/JPA.
 * El literal `.class` se refiere al objeto de clase en Java (metainformación).
 * @Autowired nos ayuda con la inyeccion de un servicio a otro. Por ejemplo: `@Autowired` ` private final MateriaRepository materiaRepository;` nos dice que la clase que ya creamos MateriaRepository se inyecta en materiaRepository
 * No hace fata try/catch para lanzar excepciones porque si tenés una clase anotada con @RestControllerAdvice, esa clase “escucha” todas las excepciones lanzadas en los controladores. (tiene que estar un controlleradvice con exceptionhandler).
