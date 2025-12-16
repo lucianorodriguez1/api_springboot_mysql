@@ -1,9 +1,11 @@
+/*
 package com.test.springmysql.config;
 
 import com.test.springmysql.entities.Estudiante;
 import com.test.springmysql.repositories.EstudianteRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
@@ -57,3 +59,5 @@ public class TestDataLoader {
         };
     }
 }
+
+ */

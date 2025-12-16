@@ -6,6 +6,7 @@ import com.test.springmysql.entities.Estudiante;
 import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.EstudianteRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,23 +21,42 @@ public class EstudianteService {
         this.estudianteRepository = estudianteRepository;
     }
 
-    public List<EstudianteListDTO> getEstudiantes() {
-        return estudianteRepository.findAll()
-                .stream()
-                .map(estudiante -> {
-                    EstudianteListDTO e = new EstudianteListDTO();
-                    e.setId(estudiante.getId());
-                    e.setNombre(estudiante.getNombre());
-                    e.setCuil(estudiante.getCuil());
-                    e.setComisiones(estudiante.getComisiones().stream().map(comision -> {
-                        ComisionResumenDTO ec = new ComisionResumenDTO();
-                        ec.setId(comision.getId());
-                        ec.setNombre_materia(comision.getMateria().getNombre());
-                        return ec;
-                    }).toList());
+    public List<EstudianteListDTO> getEstudiantes(Pageable pageable, String search) {
+        if(search != null){
+            List<Estudiante> lista =  estudianteRepository.findByName(search, pageable).getContent();
+            return lista.stream().map(estudiante -> {
+                EstudianteListDTO e = new EstudianteListDTO();
+                e.setId(estudiante.getId());
+                e.setNombre(estudiante.getNombre());
+                e.setCuil(estudiante.getCuil());
+                e.setComisiones(estudiante.getComisiones().stream().map(comision -> {
+                    ComisionResumenDTO ec = new ComisionResumenDTO();
+                    ec.setId(comision.getId());
+                    ec.setNombre_materia(comision.getMateria().getNombre());
+                    return ec;
+                }).toList());
 
-                    return e;
-                }).toList();
+                return e;
+            }).toList();
+
+        }else {
+            return estudianteRepository.findAll(pageable).getContent()
+                    .stream()
+                    .map(estudiante -> {
+                        EstudianteListDTO e = new EstudianteListDTO();
+                        e.setId(estudiante.getId());
+                        e.setNombre(estudiante.getNombre());
+                        e.setCuil(estudiante.getCuil());
+                        e.setComisiones(estudiante.getComisiones().stream().map(comision -> {
+                            ComisionResumenDTO ec = new ComisionResumenDTO();
+                            ec.setId(comision.getId());
+                            ec.setNombre_materia(comision.getMateria().getNombre());
+                            return ec;
+                        }).toList());
+
+                        return e;
+                    }).toList();
+        }
     }
 
     public EstudianteListDTO getEstudiante(Long id) {

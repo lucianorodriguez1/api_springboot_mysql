@@ -3,6 +3,8 @@ package com.test.springmysql.controllers;
 import com.test.springmysql.dtos.estudiantes.EstudianteListDTO;
 import com.test.springmysql.services.EstudianteService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,19 @@ public class EstudianteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EstudianteListDTO>> getAll(){
-        return ResponseEntity.ok(estudianteService.getEstudiantes());
+    public ResponseEntity<List<EstudianteListDTO>> getAll(@RequestParam(required = false,defaultValue = "1") int pageNr,
+                                                          @RequestParam(required = false, defaultValue = "10") int pageSize,
+                                                          @RequestParam(required = false, defaultValue = "id") String sortBy,
+                                                          @RequestParam(required = false, defaultValue = "ASC") String sortDir,
+                                                          @RequestParam(required = false) String search){
+        Sort sort = null;
+        if(sortDir.equalsIgnoreCase("ASC")){
+            sort= Sort.by(sortBy).ascending();
+        }else{
+            sort= Sort.by(sortBy).descending();
+
+        }
+        return ResponseEntity.ok(estudianteService.getEstudiantes(PageRequest.of(pageNr - 1, pageSize,sort),search));
     }
 
     @PostMapping

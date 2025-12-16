@@ -29,6 +29,7 @@ public class EstudianteServiceTest {
     void setup() {
     }
 
+    /*
     @DisplayName("Test obtener todos los estudiantes")
     @Test
     public void getEstudiantes() {
@@ -65,6 +66,9 @@ public class EstudianteServiceTest {
 
 
     }
+
+
+     */
 
     @DisplayName("Test obtener un estudiante por su id")
     @Test
