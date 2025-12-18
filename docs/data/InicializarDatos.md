@@ -10,11 +10,15 @@ Spring ejecuta automáticamente estos archivos al arrancar:
 3. @Sql en tests (solo testing)
 4. Migraciones (Flyway / Liquibase)
 
+Para desarrollo local → CommandLineRunner
+Para producción → Flyway/Liquibase
+
 ### Borrar filas de tablas con relaciones entre sí
 Si quiero borrar datos de tablas relacionados entre si: 
 ```sql
 SET FOREIGN_KEY_CHECKS = 0;
 
+(¡¡¡¡¡NO USAR TRUNCATE EN PRODUCCION!!!!)
 -- Repite esto para cada tabla
 TRUNCATE TABLE nombre_tabla1;
 TRUNCATE TABLE nombre_tabla2;

@@ -47,16 +47,9 @@ public class SwaggerConfig {
 
 
 ¿Qué hacen estas anotaciones?
-
 @Operation define resumen y descripción del endpoint.
-HowToDoInJava
-
 @ApiResponses documenta los códigos de respuesta.
-HowToDoInJava
-
 @Parameter describe cada parámetro de entrada.
-HowToDoInJava
-
 @Schema describe campos de DTO.
 
-https://www.bobsantosjr.com/openapi3-springboot-springdocopenapi
+Link a las anotaciones: https://www.bobsantosjr.com/openapi3-springboot-springdocopenapi
