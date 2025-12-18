@@ -1,13 +1,31 @@
 # 🎓 Sistema estudiantil con Spring Boot y MySQL
 
-Proyecto CRUD que implementa un **sistema estudiantil** usando **Spring Boot**, **Spring Data JPA**, **MySQL** y validaciones con **DTOs**.
-Tiene como objetivo documentar buenas prácticas de estructura, manejo de errores, capas y uso de herramientas modernas.
+### Descripcion
+* Proyecto CRUD que simula un ***sistema estudiantil***. 
+* Los componentes son **estudiantes**, **profesores** y **materias** con sus **comisiones**. 
+* Además de los métodos CRUD basicos tambien se puede crear una comision en una materia y agregar un estudiante en una comision. 
+* En el componente estudiante se pueden encontrar la paginacion, filtro, busqueda y parametros del swagger. 
+* Se testea el repositorio, servicio y controlador de estudiante.
+* Se usan las tecnologías **Spring Boot** y **MySQL**.
+
+### Objetivo
+Tiene como objetivo **implementar funciones** para aprender a construir el back end de una aplicacion de manera completa con spring boot y **documentar** un proyecto back end de manera completa. 
+
+### Caracteristicas
+* Arquitectura en capas
+* Entidad -- Repositorio -- Servicio -- Controlador
+* DTOs
+* Paginacion -- Filtros -- Busqueda
+* Validaciones
+* Excepciones
+* Script de inicializacion
+* Swagger
+* Testing
+
 
 ⚠️ **Aclaración**: No se usa **Lombok**.
 
----
-
-## 📊 Diagrama Entidad Relación (DER)
+### 📊 Diagrama Entidad Relación (DER)
 <img width="734" height="446" alt="Image" src="https://github.com/user-attachments/assets/06420a0a-91bb-40f0-8a7e-ea873b0319a0" /> 
 
 ---
@@ -19,6 +37,11 @@ Tiene como objetivo documentar buenas prácticas de estructura, manejo de errore
 * **spring-boot-starter-test** (Testing (JUnit + Spring Test))
 * **spring-boot-starter-validation** (agregar validaciones a los atributos de las clases, Validaciones con Bean Validation)
 * **modelmapper** (Conversión entre Entity y DTO)
+* **h2** (Base de datos en memoria para test)
+* **springdoc-openapi-starter-webmvc-ui** (Swagger)
+
+## Plugin
+* **spring-boot-maven-plugin**
 ---
 
 ## ⚙️ Variables de entorno
@@ -26,7 +49,18 @@ Tiene como objetivo documentar buenas prácticas de estructura, manejo de errore
 - `DB_USERNAME` → usuario de la base de datos
 - `DB_PASSWORD` → contraseña de la base de datos
 
-Ejemplo (`application.properties`):
+
+--- 
+
+## 🚀 Pasos para ejecutar
+1. Clonar el repositorio
+```cmd
+   git clone <https://github.com/lucianorodriguez1/sistema-estudiantil.git>
+```
+2. Configurar la base de datos MySQL
+   - Tener MySQL en ejecución.
+   - Crear la base de datos manualmente:
+3. Agregar las variables de la base de datos en `application.properties`.
 
 ```properties
 spring.datasource.url=${DB_URL}
@@ -38,40 +72,38 @@ spring.jpa.show-sql=true
 #Crear/actualiza las tablas de la base de datos. Puede ser update o create.
 spring.jpa.hibernate.ddl-auto=update
 ```
---- 
 
-## 🚀 Pasos para ejecutar
-1. Agregar las variables de la base de datos en `application.properties`.
-2. Tener la base creada en MySQL.
-3. Configurar el **RUN** para ejecutar siempre el archivo `Main`.
+4. Configurar el **RUN** para ejecutar siempre el archivo `Main`.
    > IntelliJ IDEA → `Edit Configuration -> Application -> Main Class -> Seleccionar archivo main`.
-4. Crear entidades en la carpeta `entities` con atributos, relaciones y anotaciones.
-5. Crear las carpetas `dto`, `services` y `controllers`.
-6. Crear las excepciones y  un DTO `ApiResponse` para devolver las respuestas en ese formato cuando pasa una excepcion.
+5. Al iniciar la app se van a crear los datos en la base de datos por la clase `InicializarDatos.java` de `/config`
+6. Acceder a la API y SWAGGER:
+   * http://localhost:8080
+   * http://localhost:8080/swagger-ui/index.html
 
 ---
-## 🧱 Arquitectura del proyecto
+## 🧱 Arquitectura del proyecto del `src/main/java/com.example.spring/`
 
 ``` 
+├── config/
+    ├── SwaggerConfig
+    ├── InicializarDatos 
 ├── controllers/
     ├── MateriaController.java
-
 ├── dtos/
     ├── ApiResponse.java
     └── Materia.java
-   
 ├── entities/
     └── Materia.java
 ├── exceptions/
     └── HandlerException.java
+├── mocks/
+    └── MateriaMock.java
 ├── repositories/
     └── MateriaRepository.java
 └── services/
     ├── MateriaService.java
+└── SpringMySQLApplication
 
 ```
----
-## 📚 Material de referencia
-- 🎥 Video YouTube: [Spring Boot + MySQL + ModelMapper](https://www.youtube.com/watch?v=9XoaU5IMkRY&t=457s)
----
+
 

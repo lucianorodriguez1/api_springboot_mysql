@@ -13,30 +13,29 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 
 @DataJpaTest
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class EstudianteRepositoryTest {
 
     @Autowired
     private EstudianteRepository estudianteRepository;
-    private Estudiante e1;
+    //private Estudiante e1;
 
     @BeforeEach
     void setup(){
         estudianteRepository.deleteAll();
-        e1 = new Estudiante();
-        e1.setNombre("luciano");
-        e1.setCuil("23434");
-        e1.setComisiones(null);
-
-        estudianteRepository.save(e1);
     }
 
     @DisplayName("Test para crear un estudiante")
     @Test
     void testCreateEstudiante(){
-        //given --> ya tengo el estudiante
 
-        //when --> ya lo cree en el setup
+        //given --> ESTADO INICIAL Y DATOS DE ENTRADA
+        Estudiante e1 = new Estudiante();
+        e1.setNombre("luciano");
+        e1.setCuil("23434");
+        estudianteRepository.save(e1);
+
+        //when --> ya lo cree en el setup.
+        Estudiante guardado = estudianteRepository.save(e1);
 
         //then
         assertThat(e1).isNotNull();
@@ -46,66 +45,98 @@ public class EstudianteRepositoryTest {
         assertThat(e1.getCuil()).isEqualTo("23434");
     }
 
+
+
     @DisplayName("Test para listar los estudiantes")
     @Test
     void testGetEstudiantes(){
 
-        // given
+        // GIVEN
+        Estudiante e1 = new Estudiante();
+        e1.setNombre("laura");
+        e1.setCuil("99999");
+        estudianteRepository.save(e1);
+
+
         Estudiante e2 = new Estudiante();
         e2.setNombre("maria");
-        e2.setCuil("99999");
-        e2.setComisiones(null);
-
+        e2.setCuil("8888");
         estudianteRepository.save(e2);
 
+        //WHEN
         List<Estudiante> lista = estudianteRepository.findAll();
+
+        //THEN
         assertThat(lista).isNotNull();
-        assertThat(lista).hasSize(2);  // porque yo guardé 2
+        assertThat(lista).hasSize(2);
         assertThat(lista)
                 .extracting(Estudiante::getNombre)
-                .containsExactlyInAnyOrder("luciano", "maria");
+                .containsExactlyInAnyOrder("laura", "maria");
     }
+
+
 
     @DisplayName("Test para encontrar un estudiante por su Id")
     @Test
-    void testGetEstudianteById(){
-        Estudiante e = estudianteRepository.findById(e1.getId())
+    void testGetEstudianteById() {
+
+        //GIVEN
+        Estudiante e1 = new Estudiante();
+        e1.setNombre("luciano");
+        e1.setCuil("23434");
+        estudianteRepository.save(e1);
+
+        //WHEN
+        Estudiante buscado = estudianteRepository.findById(e1.getId())
                 .orElseThrow();
 
-        assertThat(e).isNotNull();
-        assertThat(e.getId()).isNotNull();
-        assertThat(e.getId()).isGreaterThan(0);
-        assertThat(e.getNombre()).isEqualTo("luciano");
-        assertThat(e.getCuil()).isEqualTo("23434");
-
+        //THEN
+        assertThat(buscado).isNotNull();
+        assertThat(buscado.getId()).isNotNull();
+        assertThat(buscado.getId()).isGreaterThan(0);
+        assertThat(buscado.getNombre()).isEqualTo("luciano");
+        assertThat(buscado.getCuil()).isEqualTo("23434");
     }
 
     @DisplayName("Test para actualizar un estudiante por su Id")
     @Test
     void testUpdateEstudianteById(){
-        Estudiante e = estudianteRepository.findById(e1.getId())
+
+        //GIVEN
+        Estudiante e1 = new Estudiante();
+        e1.setNombre("luciano");
+        e1.setCuil("23434");
+        estudianteRepository.save(e1);
+
+        //WHEN
+        Estudiante buscado = estudianteRepository.findById(e1.getId())
                 .orElseThrow();
 
-        e.setNombre("update");
-        Estudiante actualizado = estudianteRepository.save(e);
+        buscado.setNombre("update");
+        Estudiante actualizado = estudianteRepository.save(buscado);
+
+        //THEN
         assertThat(actualizado.getNombre()).isEqualTo("update");
         assertThat(actualizado.getCuil()).isEqualTo("23434");
-
     }
 
     @DisplayName("Test para borrar un estudiante por su Id")
     @Test
     void testDeleteEstudianteById(){
+        //GIVEN
+        Estudiante e1 = new Estudiante();
+        e1.setNombre("luciano");
+        e1.setCuil("23434");
+        estudianteRepository.save(e1);
 
-
+        //WHEN
         estudianteRepository.deleteById(e1.getId());
 
+        //THEN
         assertThat(estudianteRepository.findById(e1.getId())).isEmpty();
         assertThat(estudianteRepository.existsById(e1.getId())).isFalse();
 
 
     }
-
-
 
 }

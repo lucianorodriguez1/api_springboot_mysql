@@ -38,6 +38,7 @@ Se recomienda inyección por constructor para favorecer testeo e inmutabilidad.
     * El repository solo trabaja con Entities. 
     * No es recomendable usar isPresent() + get() en código productivo; se prefiere orElseThrow().---
 
---- 
-
-
+---
+## 📚 Material de referencia
+- 🎥 Video YouTube: [Spring Boot + MySQL + ModelMapper](https://www.youtube.com/watch?v=9XoaU5IMkRY&t=457s)
+---

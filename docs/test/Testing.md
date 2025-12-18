@@ -53,7 +53,7 @@ Con eso:
 * No usa tu MySQL real.
 * No necesitas configurar nada más, Spring Boot ya lo sabe hacer.
 
-SI se quiere hacer con la base de datyos origen (emn este caso mysql se copia lo sgte).
+SI se quiere hacer con la base de datos origen (en este caso mysql se copia lo sgte).
 ```java
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -326,3 +326,6 @@ No se usa mas **@MockBean** (esta deprecado). Ahora usamos **@MockitoBean** es l
 
 MockMvc NO acepta objetos Java directamente.
 * Por eso usamos la linea **objectMapper.writeValueAsString(request)**
+
+
+### Cosas a tener en cuenta al usar @BeforeEach
