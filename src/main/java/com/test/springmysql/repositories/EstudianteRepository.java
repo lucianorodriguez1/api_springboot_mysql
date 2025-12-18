@@ -14,6 +14,6 @@ public interface EstudianteRepository extends JpaRepository<Estudiante,Long> {
     // sirve para usar con la clase TestDataLoader de estudiante.
     List<Estudiante> findByCuilStartingWith(String prefix);
 
-    Page<Estudiante> findByName(String name, Pageable pageable);
+    Page<Estudiante> findByNombre(String name, Pageable pageable);
 
 }

@@ -23,7 +23,7 @@ public class EstudianteService {
 
     public List<EstudianteListDTO> getEstudiantes(Pageable pageable, String search) {
         if(search != null){
-            List<Estudiante> lista =  estudianteRepository.findByName(search, pageable).getContent();
+            List<Estudiante> lista =  estudianteRepository.findByNombre(search, pageable).getContent();
             return lista.stream().map(estudiante -> {
                 EstudianteListDTO e = new EstudianteListDTO();
                 e.setId(estudiante.getId());
