@@ -1,12 +1,15 @@
 # 🎓 Sistema estudiantil con Spring Boot y MySQL
 
 ### Descripcion
-* Proyecto CRUD que simula un ***sistema estudiantil***. 
+* Proyecto CRUD BACK END que simula un ***sistema estudiantil***. 
 * Los componentes son **estudiantes**, **profesores** y **materias** con sus **comisiones**. 
 * Además de los métodos CRUD basicos tambien se puede crear una comision en una materia y agregar un estudiante en una comision. 
-* En el componente estudiante se pueden encontrar la paginacion, filtro, busqueda y parametros del swagger. 
+* En el componente estudiante se pueden encontrar paginacion, filtros, busquedas y parametros para mostrar los endpoints en swagger. 
 * Se testea el repositorio, servicio y controlador de estudiante.
 * Se usan las tecnologías **Spring Boot** y **MySQL**.
+
+### 📊 Diagrama Entidad Relación (DER)
+<img width="734" height="446" alt="Image" src="https://github.com/user-attachments/assets/06420a0a-91bb-40f0-8a7e-ea873b0319a0" /> 
 
 ### Objetivo
 Tiene como objetivo **implementar funciones** para aprender a construir el back end de una aplicacion de manera completa con spring boot y **documentar** un proyecto back end de manera completa. 
@@ -18,15 +21,14 @@ Tiene como objetivo **implementar funciones** para aprender a construir el back 
 * Paginacion -- Filtros -- Busqueda
 * Validaciones
 * Excepciones
-* Script de inicializacion
+* Scripts de inicializacion (Mocks)
 * Swagger
-* Testing
-
+* Testing (Repositorio, Servicio y Controlador)
+* Docs (Documentacion de todas las funcionalidades del proyecto)
 
 ⚠️ **Aclaración**: No se usa **Lombok**.
 
-### 📊 Diagrama Entidad Relación (DER)
-<img width="734" height="446" alt="Image" src="https://github.com/user-attachments/assets/06420a0a-91bb-40f0-8a7e-ea873b0319a0" /> 
+
 
 ---
 
@@ -55,7 +57,7 @@ Tiene como objetivo **implementar funciones** para aprender a construir el back 
 ## 🚀 Pasos para ejecutar
 1. Clonar el repositorio
 ```cmd
-   git clone <https://github.com/lucianorodriguez1/sistema-estudiantil.git>
+   git clone https://github.com/lucianorodriguez1/sistema-estudiantil.git
 ```
 2. Configurar la base de datos MySQL
    - Tener MySQL en ejecución.

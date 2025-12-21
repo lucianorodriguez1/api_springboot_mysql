@@ -1,8 +1,10 @@
 package com.test.springmysql.config;
 
 import com.test.springmysql.entities.Estudiante;
+import com.test.springmysql.entities.Materia;
 import com.test.springmysql.entities.Profesor;
 import com.test.springmysql.mocks.EstudianteMock;
+import com.test.springmysql.mocks.MateriaMock;
 import com.test.springmysql.mocks.ProfesorMock;
 import com.test.springmysql.repositories.ComisionRepository;
 import com.test.springmysql.repositories.EstudianteRepository;
@@ -36,18 +38,25 @@ public class InicializarDatos {
             ComisionRepository comRepo) {
         return args -> {
 
-
             if(estRepo.count() == 0 ){
                 List<Estudiante> e = EstudianteMock.crearEstudiantes(50);
                 estRepo.saveAll(e);
             };
 
-
             if(proRepo.count() == 0 ){
                 List<Profesor> p = ProfesorMock.crearProfesores(4);
                 proRepo.saveAll(p);
             };
-
+            /*
+            if(matRepo.count() == 0){
+                List<Materia> m = MateriaMock.crearMaterias(7);
+                matRepo.saveAll(m);
+            }
+            if(comRepo.count() == 0){
+                List<Comision> c = ComisionMock.crearComision();
+                comRepo.saveAll(c);
+            }
+            */
         };
     }
 }

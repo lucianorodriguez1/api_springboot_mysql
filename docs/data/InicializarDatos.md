@@ -1,20 +1,20 @@
-# Inicializar datos
-Hay 4 formas
+# Inicializar datos (con Mocks)
 
-1. data.sql / schema.sql (SQL puro)
-   Cómo funciona
+## Descripcion
+Creo los mocks en la `carpeta /mocks` y la configuracion en `config/InicializarDatos`
 
-Spring ejecuta automáticamente estos archivos al arrancar:
+## Formas de iniciar datos
 
+1. data.sql / schema.sql (SQL puro): Spring ejecuta automáticamente estos archivos al arrancar
 2. CommandLineRunner / ApplicationRunner (Java)
 3. @Sql en tests (solo testing)
-4. Migraciones (Flyway / Liquibase)
+4. Migraciones (Flyway / Liquibase):
+   * Para desarrollo local → CommandLineRunner
+   * Para producción → Flyway/Liquibase
 
-Para desarrollo local → CommandLineRunner
-Para producción → Flyway/Liquibase
-
-### Borrar filas de tablas con relaciones entre sí
+## Borrar datos de tablas relacionadas en SQL
 Si quiero borrar datos de tablas relacionados entre si: 
+
 ```sql
 SET FOREIGN_KEY_CHECKS = 0;
 

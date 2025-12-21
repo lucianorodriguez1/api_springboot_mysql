@@ -1,3 +1,4 @@
+# Repository
 ## 🗄️ Métodos principales de JpaRepository
 * `save(S entity)` — guardar o actualizar una entidad.
 * `saveAll(Iterable<S> entities)` — guardar varias entidades.

@@ -10,3 +10,6 @@
 * `internalServerError()` → respuesta **500 Internal Server Error**
 
 ---
+
+* El controller deberia usar DTOs (request y response).
+

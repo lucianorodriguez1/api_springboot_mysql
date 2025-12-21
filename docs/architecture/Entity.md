@@ -1,4 +1,4 @@
-## 🗄 Entidades — Buenas prácticas
+# 🗄 Entidades — Buenas prácticas
 
 Cada entidad debe incluir:
 
@@ -22,6 +22,8 @@ En las clases de tipo **entities** :
 * Se suele utilizar long en IDs y no int porque permite un mayor alcance para valores numericos.
 * Se usa `@Column(name="nombre_columna")` si quiero cambiar el nombre del atributo
 * Incluir siempre getters, setters y constructor vacío en entidades para Hibernate/JPA.
+* A veces se puede usar `@JsonIgnore` para evitar ciclos en relaciones bidireccionales.
+
 
 ---
 

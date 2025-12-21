@@ -1,5 +1,6 @@
+# 🛑 Manejo de Excepciones
 
-## 🛑 Manejo de Excepciones
+## Pasos a ejecutar
 1. Crear paquete `exceptions`.
 2. Agregar clase **global** de manejo de excepciones con nombre **HandlerException** con `@RestControllerAdvice`.
 3. Las excepciones personalizadas extienden de `RuntimeException`.

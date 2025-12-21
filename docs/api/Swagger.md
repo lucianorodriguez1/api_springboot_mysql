@@ -1,10 +1,12 @@
-## Swagger
-Breve documentacion de como usar swagger en una app sin tener spring security.
-Link de la docu de swagger : https://springdoc.org/
-Link al video que habla sobre configuracion de Info y Seguridad de Swagger : https://www.youtube.com/watch?v=SVZZ3B5gwuM 
-Link al docs de swagger:
-https://www.kranio.io/blog/integra-swagger-con-spring-boot-documenta-tus-apis-restful
+# Swagger
 
+El swagger esta implementado en los archivos:
+* `config/SwaggerConfig` 
+* `controllers/EstudianteControllers`
+* `dto/EstudianteListDTO`
+
+
+## Pasos a ejecutar
 1. Instalar dependencia:
 ```xml
   <dependency>
@@ -46,10 +48,18 @@ public class SwaggerConfig {
                                               response=)`
 
 
-¿Qué hacen estas anotaciones?
-@Operation define resumen y descripción del endpoint.
-@ApiResponses documenta los códigos de respuesta.
-@Parameter describe cada parámetro de entrada.
-@Schema describe campos de DTO.
+### Descripcion de anotaciones
 
+* `@Operation` define resumen y descripción del endpoint.
+* `@ApiResponses` documenta los códigos de respuesta.
+* `@Parameter` describe cada parámetro de entrada.
+* `@Schema` describe campos de DTO.
+
+
+## Material 
 Link a las anotaciones: https://www.bobsantosjr.com/openapi3-springboot-springdocopenapi
+Breve documentacion de como usar swagger en una app sin tener spring security.
+Link de la docu de swagger : https://springdoc.org/
+Link al video que habla sobre configuracion de Info y Seguridad de Swagger : https://www.youtube.com/watch?v=SVZZ3B5gwuM
+Link al docs de swagger:
+https://www.kranio.io/blog/integra-swagger-con-spring-boot-documenta-tus-apis-restful
