@@ -67,11 +67,11 @@ public class MateriaService {
                     .map(comision -> {
                         MateriaComisionDTO mc = new MateriaComisionDTO();
                         mc.setId(comision.getId());
-                        mc.setAlumnos_permitidos(comision.getAlumnos_permitidos());
-                        mc.setFecha_inicio(comision.getFecha_inicio());
-                        mc.setFecha_final(comision.getFecha_final());
-                        mc.setHora_inicio(comision.getHora_inicio());
-                        mc.setHora_final(comision.getHora_final());
+                        mc.setAlumnosPermitidos(comision.getAlumnosPermitidos());
+                        mc.setFechaInicio(comision.getFechaInicio());
+                        mc.setFechaFinal(comision.getFechaFinal());
+                        mc.setHoraInicio(comision.getHoraInicio());
+                        mc.setHoraFinal(comision.getHoraFinal());
                         return mc;
                     })
                     .toList()

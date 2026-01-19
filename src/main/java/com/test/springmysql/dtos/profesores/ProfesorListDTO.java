@@ -15,7 +15,7 @@ public class ProfesorListDTO {
     @NotNull
     private String nombre;
     @PositiveOrZero
-    private int antiguedad_universidad;
+    private int antiguedadUniversidad;
     private List<ComisionResumenDTO> comisiones = new ArrayList<>();
 
     public ProfesorListDTO() {
@@ -29,12 +29,12 @@ public class ProfesorListDTO {
         this.nombre = nombre;
     }
 
-    public int getAntiguedad_universidad() {
-        return antiguedad_universidad;
+    public int getAntiguedadUniversidad() {
+        return antiguedadUniversidad;
     }
 
-    public void setAntiguedad_universidad(int antiguedad_universidad) {
-        this.antiguedad_universidad = antiguedad_universidad;
+    public void setAntiguedadUniversidad(int antiguedadUniversidad) {
+        this.antiguedadUniversidad = antiguedadUniversidad;
     }
 
     public long getId() {

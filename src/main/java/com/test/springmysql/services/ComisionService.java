@@ -32,11 +32,11 @@ public class ComisionService {
                 .map(c -> {
                     ComisionListDTO dto = new ComisionListDTO();
                     dto.setId(c.getId());
-                    dto.setAlumnos_permitidos(c.getAlumnos_permitidos());
-                    dto.setFecha_inicio(c.getFecha_inicio());
-                    dto.setFecha_final(c.getFecha_final());
-                    dto.setHora_inicio(c.getHora_inicio());
-                    dto.setHora_final(c.getHora_final());
+                    dto.setAlumnosPermitidos(c.getAlumnosPermitidos());
+                    dto.setFechaInicio(c.getFechaInicio());
+                    dto.setFechaFinal(c.getFechaFinal());
+                    dto.setHoraInicio(c.getHoraInicio());
+                    dto.setHoraFinal(c.getHoraFinal());
 
                     dto.setMateriaId(c.getMateria().getId());
                     dto.setMateriaNombre(c.getMateria().getNombre());
@@ -51,11 +51,11 @@ public class ComisionService {
        Comision c = comisionRepository.findById(id)
                .orElseThrow(()-> new RecursoNoEncontrado("comision","id",id));
        ComisionDetailDTO cd =  new ComisionDetailDTO();
-       cd.setAlumnos_permitidos(c.getAlumnos_permitidos());
-       cd.setFecha_inicio(c.getFecha_inicio());
-       cd.setFecha_final(c.getFecha_final());
-       cd.setHora_inicio(c.getHora_inicio());
-       cd.setHora_final(c.getHora_final());
+       cd.setAlumnosPermitidos(c.getAlumnosPermitidos());
+       cd.setFechaInicio(c.getFechaInicio());
+       cd.setFechaFinal(c.getFechaFinal());
+       cd.setHoraInicio(c.getHoraInicio());
+       cd.setHoraFinal(c.getHoraFinal());
        cd.setId(c.getId());
        cd.setMateriaNombre(c.getMateria().getNombre());
 
@@ -95,9 +95,9 @@ public class ComisionService {
         Comision c = comisionRepository.findById(id)
                 .orElseThrow(()-> new RecursoNoEncontrado("comision","id",id));
 
-        c.setAlumnos_permitidos(comisiondto.getAlumnos_permitidos());
-        c.setFecha_final(comisiondto.getFecha_final());
-        c.setFecha_inicio(comisiondto.getFecha_inicio());
+        c.setAlumnosPermitidos(comisiondto.getAlumnosPermitidos());
+        c.setFechaFinal(comisiondto.getFechaFinal());
+        c.setFechaInicio(comisiondto.getFechaInicio());
 
         Comision saved = comisionRepository.save(c);
         return mapper.map(saved, ComisionListDTO.class);

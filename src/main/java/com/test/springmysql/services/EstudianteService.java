@@ -32,7 +32,7 @@ public class EstudianteService {
                 e.setComisiones(estudiante.getComisiones().stream().map(comision -> {
                     ComisionResumenDTO ec = new ComisionResumenDTO();
                     ec.setId(comision.getId());
-                    ec.setNombre_materia(comision.getMateria().getNombre());
+                    ec.setNombreMateria(comision.getMateria().getNombre());
                     return ec;
                 }).toList());
 
@@ -50,7 +50,7 @@ public class EstudianteService {
                         e.setComisiones(estudiante.getComisiones().stream().map(comision -> {
                             ComisionResumenDTO ec = new ComisionResumenDTO();
                             ec.setId(comision.getId());
-                            ec.setNombre_materia(comision.getMateria().getNombre());
+                            ec.setNombreMateria(comision.getMateria().getNombre());
                             return ec;
                         }).toList());
 
@@ -66,7 +66,7 @@ public class EstudianteService {
         el.setComisiones(e.getComisiones().stream().map(comision -> {
             ComisionResumenDTO ec = new ComisionResumenDTO();
             ec.setId(comision.getId());
-            ec.setNombre_materia(comision.getMateria().getNombre());
+            ec.setNombreMateria(comision.getMateria().getNombre());
             return ec;
         }).toList());
         return el;

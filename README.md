@@ -3,10 +3,16 @@
 ### Descripcion
 * Proyecto CRUD BACK END que simula un ***sistema estudiantil***. 
 * Los componentes son **estudiantes**, **profesores** y **materias** con sus **comisiones**. 
-* Además de los métodos CRUD basicos tambien se puede crear una comision en una materia y agregar un estudiante en una comision. 
-* En el componente estudiante se pueden encontrar paginacion, filtros, busquedas y parametros para mostrar los endpoints en swagger. 
-* Se testea el repositorio, servicio y controlador de estudiante.
 * Se usan las tecnologías **Spring Boot** y **MySQL**.
+
+### Acciones
+* Realizar métodos CRUD 
+* Crear una comision en una materia 
+* Agregar un estudiante en una comision. 
+* Realizar paginacion, filtros, busquedas en estudiante 
+* Agregar parametros para mostrar los endpoints en swagger. 
+* Se testea el repositorio, servicio y controlador de estudiante.
+
 
 ### 📊 Diagrama Entidad Relación (DER)
 <img width="734" height="446" alt="Image" src="https://github.com/user-attachments/assets/06420a0a-91bb-40f0-8a7e-ea873b0319a0" /> 
