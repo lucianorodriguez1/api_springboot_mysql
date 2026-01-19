@@ -2,6 +2,7 @@ package com.test.springmysql.services;
 
 import com.test.springmysql.dtos.comisiones.ComisionListDTO;
 import com.test.springmysql.dtos.materias.MateriaComisionDTO;
+import com.test.springmysql.dtos.materias.MateriaCreateResponse;
 import com.test.springmysql.dtos.materias.MateriaDetailDTO;
 import com.test.springmysql.dtos.materias.MateriaListDTO;
 import com.test.springmysql.entities.Comision;
@@ -31,11 +32,7 @@ public class MateriaService {
         return materiaRepository.findAll().stream().map(m -> {
             MateriaListDTO dto = mapper.map(m, MateriaListDTO.class);
             //CODIGO PARA SETEAR LOS IDS DE COMISIONES EN MATERIA
-            dto.setComisionesId(
-                    m.getComisiones().stream().map(c->
-                            c.getId())
-                            .toList()
-            );
+            dto.setCantComisiones(m.getComisiones().size());
             return dto;
         }).toList();
 
@@ -80,10 +77,13 @@ public class MateriaService {
         return dto;
     }
 
-    public MateriaListDTO createMateria(MateriaListDTO materiadto) {
+    public MateriaCreateResponse createMateria(MateriaListDTO materiadto) {
         Materia materia = mapper.map(materiadto, Materia.class);
         Materia saved = materiaRepository.save(materia);
-        return mapper.map(saved, MateriaListDTO.class);
+        return new MateriaCreateResponse(
+                saved.getId(),
+                saved.getNombre()
+        );
     }
 
     public void deleteMateria(Long id) {

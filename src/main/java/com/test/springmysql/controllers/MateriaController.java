@@ -1,6 +1,7 @@
 package com.test.springmysql.controllers;
 
 import com.test.springmysql.dtos.comisiones.ComisionListDTO;
+import com.test.springmysql.dtos.materias.MateriaCreateResponse;
 import com.test.springmysql.dtos.materias.MateriaDetailDTO;
 import com.test.springmysql.dtos.materias.MateriaListDTO;
 import com.test.springmysql.services.MateriaService;
@@ -34,7 +35,7 @@ public class MateriaController {
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody MateriaListDTO materiadto) {
-        MateriaListDTO savedMateria = materiaService.createMateria(materiadto);
+        MateriaCreateResponse savedMateria = materiaService.createMateria(materiadto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMateria);
     }
 
