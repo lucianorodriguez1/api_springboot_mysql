@@ -26,13 +26,6 @@ public class ComisionController {
         return ResponseEntity.ok(comisionService.getComisiones());
     }
 
-    /*
-    @PostMapping
-    public ResponseEntity<ComisionListDTO> create(@Valid @RequestBody ComisionListDTO comisiondto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(comisionService.createComision(comisiondto));
-    }
-
-     */
 
     @GetMapping("/{comisionId}")
     public ResponseEntity<ComisionDetailDTO> getById(@PathVariable("comisionId") Long id){
@@ -54,4 +47,12 @@ public class ComisionController {
         comisionService.addStudent(cid,eid);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/{comisionId}/profesores/{profesorId}")
+    public ResponseEntity<Void> addProfesor(@PathVariable("comisionId") Long cid,@PathVariable("profesorId") Long pid){
+        comisionService.addProfesor(cid,pid);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

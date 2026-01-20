@@ -6,25 +6,30 @@ import com.test.springmysql.dtos.comisiones.ComisionListDTO;
 import com.test.springmysql.dtos.comisiones.ComisionProfesorDTO;
 import com.test.springmysql.entities.Comision;
 import com.test.springmysql.entities.Estudiante;
+import com.test.springmysql.entities.Profesor;
 import com.test.springmysql.exceptions.EstudianteYaExisteEnComision;
 import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.ComisionRepository;
 import com.test.springmysql.repositories.EstudianteRepository;
+import com.test.springmysql.repositories.ProfesorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ComisionService {
     private final ComisionRepository comisionRepository;
     private final EstudianteRepository estudianteRepository;
+    private final ProfesorRepository profesorRepository;
 
     ModelMapper mapper = new ModelMapper();
 
-    public ComisionService(ComisionRepository comisionRepository, EstudianteRepository estudianteRepository) {
+    public ComisionService(ComisionRepository comisionRepository, EstudianteRepository estudianteRepository, ProfesorRepository profesorRepository) {
         this.comisionRepository = comisionRepository;
         this.estudianteRepository = estudianteRepository;
+        this.profesorRepository = profesorRepository;
     }
 
     public List<ComisionListDTO> getComisiones(){
@@ -118,5 +123,17 @@ public class ComisionService {
         c.getEstudiantes().add(e);
         comisionRepository.save(c);
     }
+
+    public void addProfesor(Long cid,Long pid){
+        Comision c = comisionRepository.findById(cid)
+                .orElseThrow(()->new RecursoNoEncontrado("comision","cid",cid));
+
+        Profesor p = profesorRepository.findById(pid)
+                .orElseThrow(()-> new RecursoNoEncontrado("profesor", "pid", pid));
+
+        c.getProfesores().add(p);
+        comisionRepository.save(c);
+    }
+
 
 }
