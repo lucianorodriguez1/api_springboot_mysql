@@ -9,7 +9,7 @@
 * Se usan las tecnologías **Spring Boot** y **MySQL**.
 
 ### 📊 Diagrama Entidad Relación (DER)
-<img width="734" height="446" alt="Image" src="https://github.com/user-attachments/assets/06420a0a-91bb-40f0-8a7e-ea873b0319a0" /> 
+<img width="898" height="518" alt="Image" src="https://github.com/user-attachments/assets/a0b3b488-f5ff-4cc0-9d7b-5fe7cd02d0c7" />
 
 ### Objetivo
 Tiene como objetivo **implementar funciones** para aprender a construir el back end de una aplicacion de manera completa con spring boot y **documentar** un proyecto back end de manera completa. 
