@@ -7,7 +7,7 @@ public class MateriaListDTO {
 
     private long id;
     private String nombre;
-    private List<Long> comisionesId = new ArrayList<>();
+    private int cantComisiones;
 
     public MateriaListDTO() {
     }
@@ -23,10 +23,12 @@ public class MateriaListDTO {
     public void setId(long id) {
         this.id = id;
     }
-    public List<Long> getComisionesId() {
-        return comisionesId;
+
+    public int getCantComisiones() {
+        return cantComisiones;
     }
-    public void setComisionesId(List<Long> comisionesId) {
-        this.comisionesId = comisionesId;
+
+    public void setCantComisiones(int cantComisiones) {
+        this.cantComisiones = cantComisiones;
     }
 }

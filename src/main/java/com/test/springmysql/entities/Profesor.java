@@ -10,7 +10,7 @@ public class Profesor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nombre;
-    private int antiguedad_universidad;
+    private int antiguedadUniversidad;
 
     @ManyToMany(mappedBy = "profesores")
     private List<Comision> comisiones;
@@ -34,12 +34,12 @@ public class Profesor {
         this.nombre = nombre;
     }
 
-    public int getAntiguedad_universidad() {
-        return antiguedad_universidad;
+    public int getAntiguedadUniversidad() {
+        return antiguedadUniversidad;
     }
 
-    public void setAntiguedad_universidad(int antiguedad_universidad) {
-        this.antiguedad_universidad = antiguedad_universidad;
+    public void setAntiguedadUniversidad(int antiguedadUniversidad) {
+        this.antiguedadUniversidad = antiguedadUniversidad;
     }
 
     public List<Comision> getComisiones() {

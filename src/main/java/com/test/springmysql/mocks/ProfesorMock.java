@@ -19,7 +19,7 @@ public class ProfesorMock {
             Profesor p = new Profesor();
             Random random = new Random();
             p.setNombre(NOMBRES[i]);
-            p.setAntiguedad_universidad(random.nextInt(10));
+            p.setAntiguedadUniversidad(random.nextInt(10));
             lista.add(p);
         }
         Collections.shuffle(lista);

@@ -16,51 +16,51 @@ public class ComisionListDTO {
     private String materiaNombre;
     @PositiveOrZero
     @NotNull
-    private int alumnos_permitidos;
+    private int alumnosPermitidos;
     private int cant_estudiantes;
     //private List<Long> estudiantesId = new ArrayList<>();
     private List<Long> profesoresId = new ArrayList<>();
     @NotNull
-    private LocalDate fecha_inicio;
+    private LocalDate fechaInicio;
     @NotNull
-    private LocalDate fecha_final;
+    private LocalDate fechaFinal;
     @NotNull
-    private LocalTime hora_inicio;
+    private LocalTime horaInicio;
     @NotNull
-    private LocalTime hora_final;
+    private LocalTime horaFinal;
 
     public ComisionListDTO() {
     }
 
-    public int getAlumnos_permitidos() {
-        return alumnos_permitidos;
+    public int getAlumnosPermitidos() {
+        return alumnosPermitidos;
     }
-    public void setAlumnos_permitidos(int alumnos_permitidos) {
-        this.alumnos_permitidos = alumnos_permitidos;
+    public void setAlumnosPermitidos(int alumnosPermitidos) {
+        this.alumnosPermitidos = alumnosPermitidos;
     }
-    public LocalDate getFecha_inicio() {
-        return fecha_inicio;
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
     }
-    public void setFecha_inicio(LocalDate fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
-    public LocalDate getFecha_final() {
-        return fecha_final;
+    public LocalDate getFechaFinal() {
+        return fechaFinal;
     }
-    public void setFecha_final(LocalDate fecha_final) {
-        this.fecha_final = fecha_final;
+    public void setFechaFinal(LocalDate fechaFinal) {
+        this.fechaFinal = fechaFinal;
     }
-    public LocalTime getHora_inicio() {
-        return hora_inicio;
+    public LocalTime getHoraInicio() {
+        return horaInicio;
     }
-    public void setHora_inicio(LocalTime hora_inicio) {
-        this.hora_inicio = hora_inicio;
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
     }
-    public LocalTime getHora_final() {
-        return hora_final;
+    public LocalTime getHoraFinal() {
+        return horaFinal;
     }
-    public void setHora_final(LocalTime hora_final) {
-        this.hora_final = hora_final;
+    public void setHoraFinal(LocalTime horaFinal) {
+        this.horaFinal = horaFinal;
     }
     public long getId() {
         return id;

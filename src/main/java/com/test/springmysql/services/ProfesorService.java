@@ -24,14 +24,14 @@ public class ProfesorService {
         return profesorRepository.findAll().stream()
                 .map(profesor -> {
                     ProfesorListDTO pl = new ProfesorListDTO();
-                    pl.setAntiguedad_universidad(profesor.getAntiguedad_universidad());
+                    pl.setAntiguedadUniversidad(profesor.getAntiguedadUniversidad());
                     pl.setId(profesor.getId());
                     pl.setNombre(profesor.getNombre());
                     pl.setComisiones(profesor.getComisiones().stream()
                             .map(comision -> {
                                 ComisionResumenDTO cr = new ComisionResumenDTO();
                                 cr.setId(comision.getId());
-                                cr.setNombre_materia(comision.getMateria().getNombre());
+                                cr.setNombreMateria(comision.getMateria().getNombre());
                                 return cr;
                             }).toList());
                     return pl;
@@ -41,14 +41,14 @@ public class ProfesorService {
         Profesor profesor = profesorRepository.findById(id)
                 .orElseThrow(()->new RecursoNoEncontrado("profesor", "id", id));
         ProfesorListDTO pl = new ProfesorListDTO();
-        pl.setAntiguedad_universidad(profesor.getAntiguedad_universidad());
+        pl.setAntiguedadUniversidad(profesor.getAntiguedadUniversidad());
         pl.setId(profesor.getId());
         pl.setNombre(profesor.getNombre());
         pl.setComisiones(profesor.getComisiones().stream()
                 .map(comision -> {
                     ComisionResumenDTO cr = new ComisionResumenDTO();
                     cr.setId(comision.getId());
-                    cr.setNombre_materia(comision.getMateria().getNombre());
+                    cr.setNombreMateria(comision.getMateria().getNombre());
                     return cr;
                 }).toList());
         return pl;
@@ -68,7 +68,7 @@ public class ProfesorService {
                 .orElseThrow(()->new RecursoNoEncontrado("profesor", "id", id));
 
         p.setNombre(profesordto.getNombre());
-        p.setAntiguedad_universidad(profesordto.getAntiguedad_universidad());
+        p.setAntiguedadUniversidad(profesordto.getAntiguedadUniversidad());
 
         Profesor saved = profesorRepository.save(p);
         return mapper.map(saved, ProfesorListDTO.class);

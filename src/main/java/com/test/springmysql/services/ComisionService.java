@@ -6,25 +6,30 @@ import com.test.springmysql.dtos.comisiones.ComisionListDTO;
 import com.test.springmysql.dtos.comisiones.ComisionProfesorDTO;
 import com.test.springmysql.entities.Comision;
 import com.test.springmysql.entities.Estudiante;
+import com.test.springmysql.entities.Profesor;
 import com.test.springmysql.exceptions.EstudianteYaExisteEnComision;
 import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.ComisionRepository;
 import com.test.springmysql.repositories.EstudianteRepository;
+import com.test.springmysql.repositories.ProfesorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ComisionService {
     private final ComisionRepository comisionRepository;
     private final EstudianteRepository estudianteRepository;
+    private final ProfesorRepository profesorRepository;
 
     ModelMapper mapper = new ModelMapper();
 
-    public ComisionService(ComisionRepository comisionRepository, EstudianteRepository estudianteRepository) {
+    public ComisionService(ComisionRepository comisionRepository, EstudianteRepository estudianteRepository, ProfesorRepository profesorRepository) {
         this.comisionRepository = comisionRepository;
         this.estudianteRepository = estudianteRepository;
+        this.profesorRepository = profesorRepository;
     }
 
     public List<ComisionListDTO> getComisiones(){
@@ -32,11 +37,11 @@ public class ComisionService {
                 .map(c -> {
                     ComisionListDTO dto = new ComisionListDTO();
                     dto.setId(c.getId());
-                    dto.setAlumnos_permitidos(c.getAlumnos_permitidos());
-                    dto.setFecha_inicio(c.getFecha_inicio());
-                    dto.setFecha_final(c.getFecha_final());
-                    dto.setHora_inicio(c.getHora_inicio());
-                    dto.setHora_final(c.getHora_final());
+                    dto.setAlumnosPermitidos(c.getAlumnosPermitidos());
+                    dto.setFechaInicio(c.getFechaInicio());
+                    dto.setFechaFinal(c.getFechaFinal());
+                    dto.setHoraInicio(c.getHoraInicio());
+                    dto.setHoraFinal(c.getHoraFinal());
 
                     dto.setMateriaId(c.getMateria().getId());
                     dto.setMateriaNombre(c.getMateria().getNombre());
@@ -51,11 +56,11 @@ public class ComisionService {
        Comision c = comisionRepository.findById(id)
                .orElseThrow(()-> new RecursoNoEncontrado("comision","id",id));
        ComisionDetailDTO cd =  new ComisionDetailDTO();
-       cd.setAlumnos_permitidos(c.getAlumnos_permitidos());
-       cd.setFecha_inicio(c.getFecha_inicio());
-       cd.setFecha_final(c.getFecha_final());
-       cd.setHora_inicio(c.getHora_inicio());
-       cd.setHora_final(c.getHora_final());
+       cd.setAlumnosPermitidos(c.getAlumnosPermitidos());
+       cd.setFechaInicio(c.getFechaInicio());
+       cd.setFechaFinal(c.getFechaFinal());
+       cd.setHoraInicio(c.getHoraInicio());
+       cd.setHoraFinal(c.getHoraFinal());
        cd.setId(c.getId());
        cd.setMateriaNombre(c.getMateria().getNombre());
 
@@ -95,9 +100,9 @@ public class ComisionService {
         Comision c = comisionRepository.findById(id)
                 .orElseThrow(()-> new RecursoNoEncontrado("comision","id",id));
 
-        c.setAlumnos_permitidos(comisiondto.getAlumnos_permitidos());
-        c.setFecha_final(comisiondto.getFecha_final());
-        c.setFecha_inicio(comisiondto.getFecha_inicio());
+        c.setAlumnosPermitidos(comisiondto.getAlumnosPermitidos());
+        c.setFechaFinal(comisiondto.getFechaFinal());
+        c.setFechaInicio(comisiondto.getFechaInicio());
 
         Comision saved = comisionRepository.save(c);
         return mapper.map(saved, ComisionListDTO.class);
@@ -118,5 +123,17 @@ public class ComisionService {
         c.getEstudiantes().add(e);
         comisionRepository.save(c);
     }
+
+    public void addProfesor(Long cid,Long pid){
+        Comision c = comisionRepository.findById(cid)
+                .orElseThrow(()->new RecursoNoEncontrado("comision","cid",cid));
+
+        Profesor p = profesorRepository.findById(pid)
+                .orElseThrow(()-> new RecursoNoEncontrado("profesor", "pid", pid));
+
+        c.getProfesores().add(p);
+        comisionRepository.save(c);
+    }
+
 
 }

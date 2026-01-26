@@ -1,0 +1,120 @@
+2026-01-23T09:51:09.614-03:00  WARN 12384 --- [springmysql] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11h5m22s20ms105µs400ns).
+2026-01-23T10:42:19.556-03:00  INFO 12384 --- [springmysql] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-01-23T10:42:19.565-03:00  INFO 12384 --- [springmysql] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-01-23T10:42:19.575-03:00  INFO 12384 --- [springmysql] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-23T10:42:19.588-03:00  INFO 12384 --- [springmysql] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-23T10:42:19.592-03:00  INFO 12384 --- [springmysql] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-01-23T10:42:24.522-03:00  INFO 14032 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : Starting SpringmysqlApplication using Java 24.0.1 with PID 14032 (C:\Users\luchodev\Downloads\proyectos spring\sistema-estudiantil\target\classes started by luchodev in C:\Users\luchodev\Downloads\proyectos spring\sistema-estudiantil)
+2026-01-23T10:42:24.524-03:00  INFO 14032 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-01-23T10:42:25.627-03:00  INFO 14032 --- [springmysql] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-23T10:42:25.700-03:00  INFO 14032 --- [springmysql] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 4 JPA repository interfaces.
+2026-01-23T10:42:26.215-03:00  INFO 14032 --- [springmysql] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-01-23T10:42:26.229-03:00  INFO 14032 --- [springmysql] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-23T10:42:26.229-03:00  INFO 14032 --- [springmysql] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2026-01-23T10:42:26.291-03:00  INFO 14032 --- [springmysql] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-01-23T10:42:26.292-03:00  INFO 14032 --- [springmysql] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1728 ms
+2026-01-23T10:42:26.447-03:00  INFO 14032 --- [springmysql] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-23T10:42:26.504-03:00  INFO 14032 --- [springmysql] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2026-01-23T10:42:26.538-03:00  INFO 14032 --- [springmysql] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-01-23T10:42:26.819-03:00  INFO 14032 --- [springmysql] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-23T10:42:26.848-03:00  INFO 14032 --- [springmysql] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-23T10:42:27.173-03:00  INFO 14032 --- [springmysql] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6abe62bb
+2026-01-23T10:42:27.175-03:00  INFO 14032 --- [springmysql] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-23T10:42:27.246-03:00  INFO 14032 --- [springmysql] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-23T10:42:28.028-03:00  INFO 14032 --- [springmysql] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-23T10:42:28.097-03:00  INFO 14032 --- [springmysql] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-23T10:42:28.502-03:00  WARN 14032 --- [springmysql] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-23T10:42:28.918-03:00  INFO 14032 --- [springmysql] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-01-23T10:42:28.926-03:00  INFO 14032 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : Started SpringmysqlApplication in 4.846 seconds (process running for 8.385)
+2026-01-23T10:42:29.252-03:00  WARN 14032 --- [springmysql] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-01-23T10:42:29.253-03:00  WARN 14032 --- [springmysql] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-01-23T10:49:10.077-03:00  INFO 14032 --- [springmysql] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-01-23T10:49:10.082-03:00  INFO 14032 --- [springmysql] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-01-23T10:49:10.091-03:00  INFO 14032 --- [springmysql] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-23T10:49:10.092-03:00  INFO 14032 --- [springmysql] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-23T10:49:10.098-03:00  INFO 14032 --- [springmysql] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-01-23T10:49:12.943-03:00  INFO 12148 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : Starting SpringmysqlApplication using Java 24.0.1 with PID 12148 (C:\Users\luchodev\Downloads\proyectos spring\sistema-estudiantil\target\classes started by luchodev in C:\Users\luchodev\Downloads\proyectos spring\sistema-estudiantil)
+2026-01-23T10:49:12.945-03:00  INFO 12148 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-01-23T10:49:13.788-03:00  INFO 12148 --- [springmysql] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-23T10:49:13.860-03:00  INFO 12148 --- [springmysql] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 4 JPA repository interfaces.
+2026-01-23T10:49:14.455-03:00  INFO 12148 --- [springmysql] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-01-23T10:49:14.468-03:00  INFO 12148 --- [springmysql] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-23T10:49:14.469-03:00  INFO 12148 --- [springmysql] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2026-01-23T10:49:14.528-03:00  INFO 12148 --- [springmysql] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-01-23T10:49:14.528-03:00  INFO 12148 --- [springmysql] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1540 ms
+2026-01-23T10:49:14.705-03:00  INFO 12148 --- [springmysql] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-23T10:49:14.769-03:00  INFO 12148 --- [springmysql] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2026-01-23T10:49:14.807-03:00  INFO 12148 --- [springmysql] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-01-23T10:49:15.168-03:00  INFO 12148 --- [springmysql] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-23T10:49:15.197-03:00  INFO 12148 --- [springmysql] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-23T10:49:15.548-03:00  INFO 12148 --- [springmysql] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b841713
+2026-01-23T10:49:15.550-03:00  INFO 12148 --- [springmysql] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-23T10:49:15.628-03:00  INFO 12148 --- [springmysql] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-23T10:49:16.540-03:00  INFO 12148 --- [springmysql] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-23T10:49:16.661-03:00  INFO 12148 --- [springmysql] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-23T10:49:17.351-03:00  WARN 12148 --- [springmysql] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-23T10:49:18.008-03:00  INFO 12148 --- [springmysql] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-01-23T10:49:18.018-03:00  INFO 12148 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : Started SpringmysqlApplication in 5.536 seconds (process running for 5.876)
+2026-01-23T10:49:18.631-03:00  WARN 12148 --- [springmysql] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-01-23T10:49:18.631-03:00  WARN 12148 --- [springmysql] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-01-23T10:49:50.833-03:00  INFO 12148 --- [springmysql] [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-23T10:49:50.833-03:00  INFO 12148 --- [springmysql] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-01-23T10:49:50.834-03:00  INFO 12148 --- [springmysql] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-01-23T10:50:02.764-03:00  INFO 12148 --- [springmysql] [http-nio-8080-exec-1] c.t.s.controllers.MateriaController      : POST /estudiantes - estudiante creado id=12
+2026-01-23T11:00:49.357-03:00  INFO 12148 --- [springmysql] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-01-23T11:00:49.364-03:00  INFO 12148 --- [springmysql] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-01-23T11:00:49.366-03:00  INFO 12148 --- [springmysql] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-23T11:00:49.369-03:00  INFO 12148 --- [springmysql] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-23T11:00:49.374-03:00  INFO 12148 --- [springmysql] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-01-23T11:00:52.164-03:00  INFO 4816 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : Starting SpringmysqlApplication using Java 24.0.1 with PID 4816 (C:\Users\luchodev\Downloads\proyectos spring\sistema-estudiantil\target\classes started by luchodev in C:\Users\luchodev\Downloads\proyectos spring\sistema-estudiantil)
+2026-01-23T11:00:52.167-03:00  INFO 4816 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-01-23T11:00:52.953-03:00  INFO 4816 --- [springmysql] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-23T11:00:53.015-03:00  INFO 4816 --- [springmysql] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 54 ms. Found 4 JPA repository interfaces.
+2026-01-23T11:00:53.512-03:00  INFO 4816 --- [springmysql] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-01-23T11:00:53.525-03:00  INFO 4816 --- [springmysql] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-23T11:00:53.525-03:00  INFO 4816 --- [springmysql] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2026-01-23T11:00:53.581-03:00  INFO 4816 --- [springmysql] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-01-23T11:00:53.581-03:00  INFO 4816 --- [springmysql] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1364 ms
+2026-01-23T11:00:53.735-03:00  INFO 4816 --- [springmysql] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-23T11:00:53.795-03:00  INFO 4816 --- [springmysql] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2026-01-23T11:00:53.826-03:00  INFO 4816 --- [springmysql] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-01-23T11:00:54.095-03:00  INFO 4816 --- [springmysql] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-23T11:00:54.123-03:00  INFO 4816 --- [springmysql] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-23T11:00:54.424-03:00  INFO 4816 --- [springmysql] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4fee14b
+2026-01-23T11:00:54.426-03:00  INFO 4816 --- [springmysql] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-23T11:00:54.499-03:00  INFO 4816 --- [springmysql] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-23T11:00:55.325-03:00  INFO 4816 --- [springmysql] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-23T11:00:55.403-03:00  INFO 4816 --- [springmysql] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-23T11:00:55.847-03:00  WARN 4816 --- [springmysql] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-23T11:00:56.283-03:00  INFO 4816 --- [springmysql] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-01-23T11:00:56.292-03:00  INFO 4816 --- [springmysql] [main] c.t.springmysql.SpringmysqlApplication   : Started SpringmysqlApplication in 4.6 seconds (process running for 4.955)
+2026-01-23T11:00:56.645-03:00  WARN 4816 --- [springmysql] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-01-23T11:00:56.645-03:00  WARN 4816 --- [springmysql] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-01-23T13:46:38.918-03:00  WARN 4816 --- [springmysql] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m14s139ms400ns).
+2026-01-23T19:00:55.199-03:00  WARN 4816 --- [springmysql] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h50m16s43ms520µs500ns).
+2026-01-23T19:35:15.531-03:00  INFO 4816 --- [springmysql] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-01-23T19:35:15.543-03:00  INFO 4816 --- [springmysql] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-01-23T19:35:15.556-03:00  INFO 4816 --- [springmysql] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-23T19:35:15.570-03:00  INFO 4816 --- [springmysql] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-23T19:35:15.585-03:00  INFO 4816 --- [springmysql] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

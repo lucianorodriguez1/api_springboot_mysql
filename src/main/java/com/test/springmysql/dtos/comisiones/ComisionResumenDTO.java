@@ -2,7 +2,7 @@ package com.test.springmysql.dtos.comisiones;
 
 public class ComisionResumenDTO {
     private long id;
-    private String nombre_materia;
+    private String nombreMateria;
 
     public ComisionResumenDTO() {
     }
@@ -15,11 +15,11 @@ public class ComisionResumenDTO {
         this.id = id;
     }
 
-    public String getNombre_materia() {
-        return nombre_materia;
+    public String getNombreMateria() {
+        return nombreMateria;
     }
 
-    public void setNombre_materia(String nombre_materia) {
-        this.nombre_materia = nombre_materia;
+    public void setNombreMateria(String nombreMateria) {
+        this.nombreMateria = nombreMateria;
     }
 }

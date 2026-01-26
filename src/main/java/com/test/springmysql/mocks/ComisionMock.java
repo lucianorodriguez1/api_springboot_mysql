@@ -47,12 +47,12 @@ public class ComisionMock {
             Comision c = new Comision();
 
             int alumPermitidos = generarCantAlumnosPermitidos(MIN_ALUM_PERMITIDOS, MAX_ALUM_PERMITIDOS);
-            c.setAlumnos_permitidos(alumPermitidos);
+            c.setAlumnosPermitidos(alumPermitidos);
 
             //SETEAR FECHA
             LocalDate fechaInicio = generarFechaInicio(fechaInicioMin,fechaInicioMax);
-            c.setFecha_inicio(fechaInicio);
-            c.setFecha_final(fechaInicio.plusMonths(4));
+            c.setFechaInicio(fechaInicio);
+            c.setFechaFinal(fechaInicio.plusMonths(4));
 
 
             //SETEAR HORA
@@ -64,8 +64,8 @@ public class ComisionMock {
             LocalTime hasta = rangosHorarios[indice][1];
 
 
-            c.setHora_inicio(desde);
-            c.setHora_final(hasta);
+            c.setHoraInicio(desde);
+            c.setHoraFinal(hasta);
 
             Materia m = materias.get(i);
             c.setMateria(m);
@@ -85,12 +85,12 @@ public class ComisionMock {
                 Comision c = new Comision();
 
                 int alumPermitidos = generarCantAlumnosPermitidos(MIN_ALUM_PERMITIDOS, MAX_ALUM_PERMITIDOS);
-                c.setAlumnos_permitidos(alumPermitidos);
+                c.setAlumnosPermitidos(alumPermitidos);
 
                 //SETEAR FECHA
                 LocalDate fechaInicio = generarFechaInicio(fechaInicioMin,fechaInicioMax);
-                c.setFecha_inicio(fechaInicio);
-                c.setFecha_final(fechaInicio.plusMonths(4));
+                c.setFechaInicio(fechaInicio);
+                c.setFechaFinal(fechaInicio.plusMonths(4));
 
 
                 //SETEAR HORA
@@ -102,8 +102,8 @@ public class ComisionMock {
                 LocalTime hasta = rangosHorarios[indice][1];
 
 
-                c.setHora_inicio(desde);
-                c.setHora_final(hasta);
+                c.setHoraInicio(desde);
+                c.setHoraFinal(hasta);
 
                 Materia m = materias.get(i);
                 c.setMateria(m);
