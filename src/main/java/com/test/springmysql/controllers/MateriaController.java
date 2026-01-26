@@ -6,6 +6,8 @@ import com.test.springmysql.dtos.materias.MateriaDetailDTO;
 import com.test.springmysql.dtos.materias.MateriaListDTO;
 import com.test.springmysql.services.MateriaService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ import java.util.List;
 public class MateriaController {
 
     private final MateriaService materiaService;
+    private static final Logger log =
+            LoggerFactory.getLogger(MateriaController.class);
+
 
     public MateriaController(MateriaService materiaService) {
         this.materiaService = materiaService;
@@ -36,6 +41,7 @@ public class MateriaController {
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody MateriaListDTO materiadto) {
         MateriaCreateResponse savedMateria = materiaService.createMateria(materiadto);
+        log.info("POST /estudiantes - estudiante creado id={}", savedMateria.id());
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMateria);
     }
 

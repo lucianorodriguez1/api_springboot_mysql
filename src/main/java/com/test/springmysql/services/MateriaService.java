@@ -11,7 +11,10 @@ import com.test.springmysql.exceptions.RecursoNoEncontrado;
 import com.test.springmysql.repositories.ComisionRepository;
 import com.test.springmysql.repositories.MateriaRepository;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,7 +23,8 @@ public class MateriaService {
 
     private final MateriaRepository materiaRepository;
     private final ComisionRepository comisionRepository;
-
+    private static final Logger log =
+            LoggerFactory.getLogger(MateriaService.class);
     private final ModelMapper mapper = new ModelMapper();
 
     public MateriaService(MateriaRepository materiaRepository, ComisionRepository comisionRepository) {
@@ -28,6 +32,8 @@ public class MateriaService {
         this.comisionRepository = comisionRepository;
     }
 
+
+    @Transactional(readOnly = true)
     public List<MateriaListDTO> getMaterias() {
         return materiaRepository.findAll().stream().map(m -> {
             MateriaListDTO dto = mapper.map(m, MateriaListDTO.class);
@@ -38,10 +44,17 @@ public class MateriaService {
 
     }
 
-
+    @Transactional(readOnly = true)
     public MateriaDetailDTO getMateria(Long id) {
+        log.debug("Buscando materia id = {}", id);
+
         Materia m = materiaRepository.findById(id)
-                .orElseThrow(()->new RecursoNoEncontrado("materia","id",id));
+                .orElseThrow(()->
+                {
+                    log.warn("Materia con id {} no fue encontrada",id);
+                    return new RecursoNoEncontrado("materia","id",id);
+                });
+
         MateriaDetailDTO dto =  mapper.map(m, MateriaDetailDTO.class);
 
         /*
